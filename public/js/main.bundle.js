@@ -27855,7 +27855,12 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'I\'m the Home component'
+	          'F\xE1cil, r\xE1pida cotizaci\xF3n para frelancer'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Crea ahora'
 	        )
 	      );
 	    }
@@ -27909,11 +27914,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'I\'m the App component'
-	        ),
 	        this.props.children
 	      );
 	    }
