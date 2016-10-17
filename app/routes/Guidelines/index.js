@@ -85,6 +85,45 @@ class Guidelines extends Component {
           <div className="column box-mini totaly-center align-self-bottom">align-self-bottom</div>
         </div>
 
+        <h2>Align <strong>Childrens Middle</strong> <small>(align-middle-right, align-middle-center, align-middle-left)</small></h2>
+        <div className="row panel align-bottom">
+          <div className="column medium-4 box align-middle-right align-self-top">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+          <div className="column medium-4 box align-middle-center">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+          <div className="column medium-4 box align-middle-left">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+        </div>
+
+        <h2>Align <strong>Childrens Bottom</strong> <small>(align-bottom-right, align-bottom-center, align-bottom-left)</small></h2>
+        <div className="row panel align-bottom">
+          <div className="column medium-4 box align-bottom-right align-self-top">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+          <div className="column medium-4 box align-bottom-center">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+          <div className="column medium-4 box align-bottom-left">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+        </div>
+
+        <h2>Align <strong>Childrens Top</strong> <small>(align-top-right, align-top-center, align-top-left)</small></h2>
+        <div className="row panel align-bottom">
+          <div className="column medium-4 box align-top-right align-self-top">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+          <div className="column medium-4 box align-top-center">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+          <div className="column medium-4 box align-top-left">
+            <div className="column medium-2 box-white-mini totaly-center">Text</div>
+          </div>
+        </div>
+
       </div>
     );
   }

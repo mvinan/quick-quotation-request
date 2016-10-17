@@ -30629,17 +30629,21 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "home grid-container" },
+	        { className: "home" },
 	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          "Welcome to ",
+	          "div",
+	          { className: "grid-container" },
 	          _react2.default.createElement(
-	            "strong",
+	            "h1",
 	            null,
-	            "Quick Quotes"
-	          ),
-	          " "
+	            "Welcome to ",
+	            _react2.default.createElement(
+	              "strong",
+	              null,
+	              "Quick Quotes"
+	            ),
+	            " "
+	          )
 	        )
 	      );
 	    }
@@ -30996,6 +31000,147 @@
 	            'div',
 	            { className: 'column box-mini totaly-center align-self-bottom' },
 	            'align-self-bottom'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Align ',
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            'Childrens Middle'
+	          ),
+	          ' ',
+	          _react2.default.createElement(
+	            'small',
+	            null,
+	            '(align-middle-right, align-middle-center, align-middle-left)'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row panel align-bottom' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-middle-right align-self-top' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-middle-center' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-middle-left' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Align ',
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            'Childrens Bottom'
+	          ),
+	          ' ',
+	          _react2.default.createElement(
+	            'small',
+	            null,
+	            '(align-bottom-right, align-bottom-center, align-bottom-left)'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row panel align-bottom' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-bottom-right align-self-top' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-bottom-center' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-bottom-left' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Align ',
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            'Childrens Top'
+	          ),
+	          ' ',
+	          _react2.default.createElement(
+	            'small',
+	            null,
+	            '(align-top-right, align-top-center, align-top-left)'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row panel align-bottom' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-top-right align-self-top' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-top-center' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4 box align-top-left' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column medium-2 box-white-mini totaly-center' },
+	              'Text'
+	            )
 	          )
 	        )
 	      );

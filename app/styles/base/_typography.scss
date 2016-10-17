@@ -39,5 +39,10 @@ h5{
 p{
   font-size: $font-size-medium;
   font-weight: $font-weight-regular;
-  color: color(secondary, base)
+  color: color(text, base)
+}
+
+small{
+  font-size: $font-size-small;
+  color: $gray;
 }

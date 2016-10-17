@@ -25,6 +25,7 @@ $colors: (
     base: $color-text-base,
     secondary: $color-text-secondary,
     light: lighten($color-text-base, 100%),
-    link: $color-text-link
+    link: $color-text-link,
+    p: lighten($color-text-base, $color-shade-amount)
   )
 )

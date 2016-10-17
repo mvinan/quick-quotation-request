@@ -63,6 +63,15 @@
     height: 60px;
   }
 
+  &.box-white{
+    @extend .box;
+    background-color: color(secondary, dark);
+  }
+  &.box-white-mini{
+    @extend .box-white;
+    height: 60px;
+  }
+
   //GRIDS
   @for $i from 1 through $lost-grid-columns-small {
     @include media-small() {
@@ -136,12 +145,14 @@ $align-x:(
 
 //UTILITIES ALIGNMENT
 .totaly-center{
-  @extend .align-middle;
-  @extend .align-center;
+  @extend .display-flex;
+  align-items: center;
+  justify-content: center;
   &.childrens-too{
     & > * {
-      @extend .align-middle;
-      @extend .align-center;
+      @extend .display-flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -156,5 +167,41 @@ $align-selfs: (
 @each $self, $value in $align-selfs{
   .align-self-#{$self}{
     align-self: $value;
+  }
+}
+
+//ALIGN MIDDLE-LEFT, MIDDLE-RIGHT, MIDDLE-CENTER, MIDDLE-JUSTIFY, MIDDLE-SPACED
+@each $key, $value in $align-x{
+  .align-middle-#{$key}{
+    @extend .display-flex;
+    justify-content: #{$value};
+    align-items: center;
+    & .column{
+      margin-bottom: 0;
+    }
+  }
+}
+
+//ALIGN TOP-LEFT, TOP-RIGHT, TOP-CENTER, TOP-JUSTIFY, TOP-SPACED
+@each $key, $value in $align-x{
+  .align-top-#{$key}{
+    @extend .display-flex;
+    justify-content: #{$value};
+    align-items: flex-start;
+    & .column{
+      margin-bottom: 0;
+    }
+  }
+}
+
+//ALIGN BOTTOM-LEFT, BOTTOM-RIGHT, BOTTOM-CENTER, BOTTOM-JUSTIFY, BOTTOM-SPACED
+@each $key, $value in $align-x{
+  .align-bottom-#{$key}{
+    @extend .display-flex;
+    justify-content: #{$value};
+    align-items: flex-end;
+    & .column{
+      margin-bottom: 0;
+    }
   }
 }
