@@ -158,3 +158,15 @@
     }
   }
 }
+
+$align-selfs: (
+  bottom: flex-end,
+  middle: center,
+  top: flex-start
+);
+
+@each $self, $value in $align-selfs{
+  .align-self-#{$self}{
+    align-self: $value;
+  }
+}

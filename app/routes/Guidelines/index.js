@@ -77,6 +77,14 @@ class Guidelines extends Component {
           <div className="column medium-4 box-mini fully-center">Text</div>
         </div>
 
+        <h2>Align <strong>Self, Top, Middle, Bottom</strong></h2>
+        <div className="row panel">
+          <div className="column medium-4 box fully-center">Box</div>
+          <div className="column box-mini fully-center align-self-top">align-self-top</div>
+          <div className="column box-mini fully-center align-self-middle">align-self-middle</div>
+          <div className="column box-mini fully-center align-self-bottom">align-self-bottom</div>
+        </div>
+
       </div>
     );
   }
