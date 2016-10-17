@@ -1,0 +1,43 @@
+body{
+  font: 100% $font-family-text;
+  color: color(text, base);
+}
+
+h1{
+  font-size: $font-size-xx-large;
+  font-weight: $font-weight-light;
+  font-family: $font-family-display;
+  line-height: 1.2;
+  margin-bottom: 48px;
+}
+
+h2{
+  font-size: $font-size-x-large;
+  font-weight: $font-weight-light;
+  font-family: $font-family-display;
+}
+
+h3{
+  font-size: $font-size-large;
+  font-weight: $font-weight-light;
+  font-family: $font-family-display;
+}
+
+h4{
+  font-size: $font-size-medium;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-display;
+  text-transform: uppercase;
+}
+
+h5{
+  font-size: $font-size-small;
+  font-weight: $font-weight-light;
+  font-family: $font-family-display;
+}
+
+p{
+  font-size: $font-size-medium;
+  font-weight: $font-weight-regular;
+  color: color(secondary, base)
+}

@@ -33,21 +33,24 @@ var config = {
       exclude: /(node_modules|bower_components)/,
       loader: "babel-loader"
     },{
-      test: /\.sass$/,
+      test: /\.(sass|scss)$/,
       loader: extractCSS.extract(['css?minimize','postcss','sass'])
     }]
   },
   postcss: function () {
-      return {
-        plugins: [
-          autoprefixer,
-          lost,
-          rucksackCSS,
-          mediasMinMax,
-          customMedias
-        ]
-      }
-    },
+    return {
+      plugins: [
+        autoprefixer,
+        lost,
+        rucksackCSS,
+        mediasMinMax,
+        customMedias
+      ]
+    }
+  },
+  sassLoader: {
+    indentedSyntax: true
+  },
   plugins: [extractCSS]
 }
 
