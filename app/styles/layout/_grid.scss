@@ -3,21 +3,38 @@
 
 .grid-container{
   lost-center: $grid-small;
+  lost-flex-container: column;
 
   @include media-medium() {
-    lost-center: $grid-medium;}
+    lost-center: $grid-medium;
+    lost-flex-container: column;
+  }
 
   @include media-large() {
-    lost-center: $grid-large;}
+    lost-center: $grid-large;
+    lost-flex-container: column;
+  }
 
   @include media-x-large() {
-    lost-center: $grid-x-large;}
+    lost-center: $grid-x-large;
+    lost-flex-container: column;
+  }
 }
 
 .row{
   lost-column: 1/1 flex;
   lost-flex-container: row;
   lost-utility: clearfix;
+  box-sizing: border-box;
+
+  &.panel{
+    padding-top: $lost-gutter;
+    padding-left: $lost-gutter;
+    padding-right: $lost-gutter;
+    background-color: color(secondary, base);
+    margin-top: $lost-gutter / 2;
+    margin-bottom: $lost-gutter / 2;
+  }
 }
 
 .column{
@@ -34,11 +51,19 @@
   &:last-child{
     margin-right: 0;
   }
+
+  //TEST BOXES
   &.box{
     background-color: color(primary, base);
     height: 250px;
+    color: white;
+  }
+  &.box-mini{
+    @extend .box;
+    height: 60px;
   }
 
+  //GRIDS
   @for $i from 1 through $lost-grid-columns-small {
     @include media-small() {
       &.small-#{$i}{
@@ -63,4 +88,73 @@
     }
   }
 
+}
+
+
+//POSITION ELEMENTS
+.display-flex{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+//ALIGN TOP, BOTTOM, MIDDEL
+.align-middle{
+  @extend .display-flex;
+  align-items: center;
+}
+
+.align-bottom{
+  @extend .display-flex;
+  align-items: flex-end;
+}
+
+.align-top{
+  @extend .display-flex;
+  align-items: flex-start;
+}
+
+//ALIGN CENTER, LEFT, RIGHT, SPACE-BETWEEN, SPACE-AROUND
+.align-center{
+  @extend .display-flex;
+  justify-content: center;
+}
+
+.align-left{
+  @extend .display-flex;
+  justify-content: flex-start;
+}
+
+.align-right{
+  @extend .display-flex;
+  justify-content: flex-end;
+}
+
+.align-justify{
+  @extend .display-flex;
+  justify-content: space-between;
+  position: relative;
+  &::after, &::before{
+    content: none;
+  }
+}
+
+.align-around{
+  @extend .display-flex;
+  justify-content: space-around;
+  position: relative;
+  &::after, &::before{
+    content: none;
+  }
+}
+
+//UTILITIES ALIGNMENT
+.fully-center{
+  @extend .align-middle;
+  @extend .align-center;
+  &.childrens-too{
+    & > * {
+      @extend .align-middle;
+      @extend .align-center;
+    }
+  }
 }

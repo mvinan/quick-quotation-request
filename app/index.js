@@ -8,7 +8,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 import App from './routes/App'
 import Home from './routes/Home'
-import Guidelines from './routes/Guidelines'
+import Guidelines from './routes/Guidelines/'
 
 ReactDOM.render((
   <Provider store={store}>
