@@ -75,8 +75,13 @@
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
+	var _Guidelines = __webpack_require__(/*! ./routes/Guidelines */ 272);
+	
+	var _Guidelines2 = _interopRequireDefault(_Guidelines);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//STYLES
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: _store2.default },
@@ -86,10 +91,11 @@
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { path: '/', component: _App2.default },
-	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/guidelines', component: _Guidelines2.default })
 	    )
 	  )
-	), document.getElementById('app')); //STYLES
+	), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -30840,6 +30846,267 @@
 	}(_react.Component);
 	
 	exports.default = Home;
+
+/***/ },
+/* 271 */,
+/* 272 */
+/*!**********************************!*\
+  !*** ./app/routes/Guidelines.js ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Guidelines = function (_Component) {
+	  _inherits(Guidelines, _Component);
+	
+	  function Guidelines() {
+	    _classCallCheck(this, Guidelines);
+	
+	    return _possibleConstructorReturn(this, (Guidelines.__proto__ || Object.getPrototypeOf(Guidelines)).apply(this, arguments));
+	  }
+	
+	  _createClass(Guidelines, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "guidelines grid-container" },
+	        _react2.default.createElement(
+	          "h1",
+	          null,
+	          "Automatic columns"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box" }),
+	          _react2.default.createElement("div", { className: "column box" }),
+	          _react2.default.createElement("div", { className: "column box" }),
+	          _react2.default.createElement("div", { className: "column box" }),
+	          _react2.default.createElement("div", { className: "column box" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "Column-12"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-12" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "column-6"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box small-8 medium-6" }),
+	          _react2.default.createElement("div", { className: "column box small-8 medium-6" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "column-4"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-4" }),
+	          _react2.default.createElement("div", { className: "column box medium-4" }),
+	          _react2.default.createElement("div", { className: "column box medium-4" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "column-3"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-3" }),
+	          _react2.default.createElement("div", { className: "column box medium-3" }),
+	          _react2.default.createElement("div", { className: "column box medium-3" }),
+	          _react2.default.createElement("div", { className: "column box medium-3" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "column-2"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-2" }),
+	          _react2.default.createElement("div", { className: "column box medium-2" }),
+	          _react2.default.createElement("div", { className: "column box medium-2" }),
+	          _react2.default.createElement("div", { className: "column box medium-2" }),
+	          _react2.default.createElement("div", { className: "column box medium-2" }),
+	          _react2.default.createElement("div", { className: "column box medium-2" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "column-1"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "Cualquier Tipo de Columna"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-12" }),
+	          _react2.default.createElement("div", { className: "column box medium-2" }),
+	          _react2.default.createElement("div", { className: "column box medium-8" }),
+	          _react2.default.createElement("div", { className: "column box medium-2 clear" }),
+	          _react2.default.createElement("div", { className: "column box medium-6" }),
+	          _react2.default.createElement("div", { className: "column box medium-6" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" }),
+	          _react2.default.createElement("div", { className: "column box medium-1" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-12" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-12" })
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
+	          _react2.default.createElement("div", { className: "column box medium-4" }),
+	          _react2.default.createElement("div", { className: "column box" }),
+	          _react2.default.createElement("div", { className: "column box medium-4" })
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "F\xE1cil y r\xE1pida ",
+	          _react2.default.createElement(
+	            "strong",
+	            null,
+	            "cotizaci\xF3n"
+	          ),
+	          " para freelancers"
+	        ),
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "F\xE1cil y r\xE1pida ",
+	          _react2.default.createElement(
+	            "strong",
+	            null,
+	            "cotizaci\xF3n"
+	          ),
+	          " para freelancers"
+	        ),
+	        _react2.default.createElement(
+	          "h4",
+	          null,
+	          "F\xE1cil y r\xE1pida ",
+	          _react2.default.createElement(
+	            "strong",
+	            null,
+	            "cotizaci\xF3n"
+	          ),
+	          " para freelancers"
+	        ),
+	        _react2.default.createElement(
+	          "h5",
+	          null,
+	          "F\xE1cil y r\xE1pida ",
+	          _react2.default.createElement(
+	            "strong",
+	            null,
+	            "cotizaci\xF3n"
+	          ),
+	          " para freelancers"
+	        ),
+	        _react2.default.createElement(
+	          "h6",
+	          null,
+	          "F\xE1cil y r\xE1pida ",
+	          _react2.default.createElement(
+	            "strong",
+	            null,
+	            "cotizaci\xF3n"
+	          ),
+	          " para freelancers"
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { className: "button default phantom" },
+	          "Crea ahora"
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { className: "button primary phantom" },
+	          "Crea ahora"
+	        ),
+	        _react2.default.createElement(
+	          "a",
+	          { className: "button secondary phantom" },
+	          "Crea ahora"
+	        ),
+	        _react2.default.createElement(
+	          "span",
+	          { className: "text" },
+	          "Es gratis :)"
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Guidelines;
+	}(_react.Component);
+	
+	exports.default = Guidelines;
 
 /***/ }
 /******/ ]);
