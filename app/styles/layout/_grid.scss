@@ -97,58 +97,45 @@
   flex-flow: row wrap;
 }
 
-//ALIGN TOP, BOTTOM, MIDDEL
-.align-middle{
-  @extend .display-flex;
-  align-items: center;
-}
+//ALIGN TOP, BOTTOM, MIDDLE
+$align-y:(
+  top: flex-start,
+  bottom: flex-end,
+  middle: center
+);
 
-.align-bottom{
-  @extend .display-flex;
-  align-items: flex-end;
-}
-
-.align-top{
-  @extend .display-flex;
-  align-items: flex-start;
-}
-
-//ALIGN CENTER, LEFT, RIGHT, SPACE-BETWEEN, SPACE-AROUND
-.align-center{
-  @extend .display-flex;
-  justify-content: center;
-}
-
-.align-left{
-  @extend .display-flex;
-  justify-content: flex-start;
-}
-
-.align-right{
-  @extend .display-flex;
-  justify-content: flex-end;
-}
-
-.align-justify{
-  @extend .display-flex;
-  justify-content: space-between;
-  position: relative;
-  &::after, &::before{
-    content: none;
+@each $y, $value in $align-y{
+  .align-#{$y}{
+    @extend .display-flex;
+    align-items: #{$value};
   }
 }
 
-.align-around{
-  @extend .display-flex;
-  justify-content: space-around;
-  position: relative;
-  &::after, &::before{
-    content: none;
+//ALIGN CENTER, LEFT, RIGHT, SPACE-BETWEEN, SPACE-AROUND
+$align-x:(
+  left: flex-start,
+  center: center,
+  right: flex-end,
+  justify: space-between,
+  spaced: space-around
+);
+
+@each $x, $value in $align-x{
+  .align-#{$x}{
+    @extend .display-flex;
+    justify-content: #{$value};
+
+    @if ($x == justify or $x == spaced){
+      position: relative;
+      &::after, &::before{
+        content: none;
+      }
+    }
   }
 }
 
 //UTILITIES ALIGNMENT
-.fully-center{
+.totaly-center{
   @extend .align-middle;
   @extend .align-center;
   &.childrens-too{
@@ -159,6 +146,7 @@
   }
 }
 
+//ALIGN SELF
 $align-selfs: (
   bottom: flex-end,
   middle: center,

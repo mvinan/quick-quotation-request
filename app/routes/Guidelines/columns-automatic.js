@@ -9,7 +9,7 @@ class AutomaticColumns extends Component {
         <div className="row">
           {
             columns.map( (i,column)=>{
-              return <div key={i} className="column box-mini fully-center">auto column</div>
+              return <div key={i} className="column box-mini totaly-center">auto column</div>
             })
           }
         </div>

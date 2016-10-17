@@ -30720,17 +30720,17 @@
 	        _react2.default.createElement(
 	          'h2',
 	          null,
-	          'Fully ',
+	          'Totaly ',
 	          _react2.default.createElement(
 	            'strong',
 	            null,
 	            'Center'
 	          ),
-	          ' e hijos'
+	          ' and childrens too'
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row panel fully-center childrens-too' },
+	          { className: 'row panel totaly-center childrens-too' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'column box' },
@@ -30762,12 +30762,12 @@
 	          { className: 'row panel align-left' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-4 fully-center' },
+	            { className: 'column box-mini medium-4 totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-4 fully-center' },
+	            { className: 'column box-mini medium-4 totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30786,12 +30786,12 @@
 	          { className: 'row panel align-center' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-4 fully-center' },
+	            { className: 'column box-mini medium-4 totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-4 fully-center' },
+	            { className: 'column box-mini medium-4 totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30810,12 +30810,12 @@
 	          { className: 'row panel align-right' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-4 fully-center' },
+	            { className: 'column box-mini medium-4 totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-4 fully-center' },
+	            { className: 'column box-mini medium-4 totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30834,17 +30834,17 @@
 	          { className: 'row panel align-justify' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-2 fully-center' },
+	            { className: 'column box-mini medium-2 totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-2 fully-center' },
+	            { className: 'column box-mini medium-2 totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-2 fully-center' },
+	            { className: 'column box-mini medium-2 totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30860,20 +30860,20 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row panel align-around' },
+	          { className: 'row panel align-spaced' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-2 fully-center' },
+	            { className: 'column box-mini medium-2 totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-2 fully-center' },
+	            { className: 'column box-mini medium-2 totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini medium-2 fully-center' },
+	            { className: 'column box-mini medium-2 totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30892,17 +30892,17 @@
 	          { className: 'row panel align-middle' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box-mini fully-center' },
+	            { className: 'column medium-4 box-mini totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box fully-center' },
+	            { className: 'column medium-4 box totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box-mini fully-center' },
+	            { className: 'column medium-4 box-mini totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30921,17 +30921,17 @@
 	          { className: 'row panel align-top' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box-mini fully-center' },
+	            { className: 'column medium-4 box-mini totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box fully-center' },
+	            { className: 'column medium-4 box totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box-mini fully-center' },
+	            { className: 'column medium-4 box-mini totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30950,17 +30950,17 @@
 	          { className: 'row panel align-bottom' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box-mini fully-center' },
+	            { className: 'column medium-4 box-mini totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box fully-center' },
+	            { className: 'column medium-4 box totaly-center' },
 	            'Text'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box-mini fully-center' },
+	            { className: 'column medium-4 box-mini totaly-center' },
 	            'Text'
 	          )
 	        ),
@@ -30979,22 +30979,22 @@
 	          { className: 'row panel' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column medium-4 box fully-center' },
+	            { className: 'column medium-4 box totaly-center' },
 	            'Box'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini fully-center align-self-top' },
+	            { className: 'column box-mini totaly-center align-self-top' },
 	            'align-self-top'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini fully-center align-self-middle' },
+	            { className: 'column box-mini totaly-center align-self-middle' },
 	            'align-self-middle'
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'column box-mini fully-center align-self-bottom' },
+	            { className: 'column box-mini totaly-center align-self-bottom' },
 	            'align-self-bottom'
 	          )
 	        )
@@ -31060,7 +31060,7 @@
 	          columns.map(function (i, column) {
 	            return _react2.default.createElement(
 	              'div',
-	              { key: i, className: 'column box-mini fully-center' },
+	              { key: i, className: 'column box-mini totaly-center' },
 	              'auto column'
 	            );
 	          })
@@ -48121,7 +48121,7 @@
 	        columns.map(function (i, column) {
 	          return _react2.default.createElement(
 	            'div',
-	            { key: i, className: 'column box-mini medium-' + n + ' fully-center' },
+	            { key: i, className: 'column box-mini medium-' + n + ' totaly-center' },
 	            n == 1 ? 'col-' + n : 'medium-' + n
 	          );
 	        })

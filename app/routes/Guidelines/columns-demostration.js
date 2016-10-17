@@ -12,7 +12,7 @@ class DemostrationColumns extends Component {
       <div className="row panel">
         {
           columns.map((i, column) =>{
-            return <div key={i} className={`column box-mini medium-${n} fully-center`}>{n == 1 ? `col-${n}` : `medium-${n}`}</div>
+            return <div key={i} className={`column box-mini medium-${n} totaly-center`}>{n == 1 ? `col-${n}` : `medium-${n}`}</div>
           })
         }
       </div>
