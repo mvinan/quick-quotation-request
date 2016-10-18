@@ -6,6 +6,9 @@ body{
 .secondary-typography-color{
   color: color(primary, base);
 }
+.light-typography-color{
+  color: color(secondary, dark);
+}
 
 h1{
   font-size: $font-size-xx-large;
@@ -16,6 +19,9 @@ h1{
   &.secondary{
     @extend .secondary-typography-color;
   }
+  &.light{
+    @extend .light-typography-color;
+  }
 }
 
 h2{
@@ -25,6 +31,9 @@ h2{
   &.secondary{
     @extend .secondary-typography-color;
   }
+  &.light{
+    @extend .light-typography-color;
+  }
 }
 
 h3{
@@ -33,6 +42,9 @@ h3{
   font-family: $font-family-display;
   &.secondary{
     @extend .secondary-typography-color;
+  }
+  &.light{
+    @extend .light-typography-color;
   }
 }
 
@@ -44,6 +56,9 @@ h4{
   &.secondary{
     @extend .secondary-typography-color;
   }
+  &.light{
+    @extend .light-typography-color;
+  }
 }
 
 h5{
@@ -53,11 +68,17 @@ h5{
   &.secondary{
     @extend .secondary-typography-color;
   }
+  &.light{
+    @extend .light-typography-color;
+  }
 }
 
 h6{
   &.secondary{
     @extend .secondary-typography-color;
+  }
+  &.light{
+    @extend .light-typography-color;
   }
 }
 
@@ -71,17 +92,31 @@ p{
   &.lead{
     font-size: 18px;
   }
+  &.light{
+    @extend .light-typography-color;
+  }
 }
 
 small{
   font-size: $font-size-small;
   color: $gray;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   &.secondary{
     @extend .secondary-typography-color;
+  }
+  &.light{
+    @extend .light-typography-color;
   }
 }
 
 a{
   text-decoration: none;
   color: color(primary, base);
+}
+
+label{
+  font-size: $font-size-small;
+  color: $black;
+  font-weight: $font-weight-bold;
 }

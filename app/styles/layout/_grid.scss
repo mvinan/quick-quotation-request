@@ -99,11 +99,21 @@
 
 }
 
-
 //POSITION ELEMENTS
 .display-flex{
   display: flex;
   flex-flow: row wrap;
+}
+
+//FLEX-ROW, FLEX-COLUMN
+.flex-column{
+  display: flex;
+  flex-flow: column;
+}
+
+.flex-row{
+  display: flex;
+  flex-flow: row;
 }
 
 //ALIGN TOP, BOTTOM, MIDDLE

@@ -48440,6 +48440,16 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 209);
+	
+	var _QuotedCode = __webpack_require__(/*! ../components/QuotedCode */ 278);
+	
+	var _QuotedCode2 = _interopRequireDefault(_QuotedCode);
+	
+	var _ServiceItems = __webpack_require__(/*! ../components/ServiceItems */ 281);
+	
+	var _ServiceItems2 = _interopRequireDefault(_ServiceItems);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48462,11 +48472,170 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'create' },
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'I\'m the Create component'
+	          'div',
+	          { className: 'grid-container' },
+	          _react2.default.createElement(
+	            'h2',
+	            { className: 'row align-center' },
+	            'Laboratorio de Cotizaciones'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'grid-container' },
+	          _react2.default.createElement(
+	            'form',
+	            { className: 'form panel' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row' },
+	              _react2.default.createElement(_QuotedCode2.default, null),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'column medium-6' },
+	                  ' ',
+	                  _react2.default.createElement(
+	                    'small',
+	                    { className: 'light' },
+	                    'Para:'
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row flex-column' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'input-group column medium-10' },
+	                      _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Nombre'
+	                      ),
+	                      _react2.default.createElement('input', { type: 'text', placeholder: 'Nombre de la compa\xF1ia...' })
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'input-group column medium-10' },
+	                      _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Direcci\xF3n'
+	                      ),
+	                      _react2.default.createElement('input', { type: 'text', placeholder: 'Direcci\xF3n, codigo postal, ciudad, pa\xEDs...' })
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'input-group column medium-10' },
+	                      _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Detalles'
+	                      ),
+	                      _react2.default.createElement('textarea', { type: 'textarea', placeholder: 'Detalles, telefono de contacto, n\xBA casa, etc...' })
+	                    )
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'column medium-6' },
+	                  _react2.default.createElement(
+	                    'small',
+	                    { className: 'light' },
+	                    'Desde:'
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row flex-column' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'input-group column medium-10' },
+	                      _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Nombre'
+	                      ),
+	                      _react2.default.createElement('input', { type: 'text', placeholder: 'Nombre de la compa\xF1ia...' })
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'input-group column medium-10' },
+	                      _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Direcci\xF3n'
+	                      ),
+	                      _react2.default.createElement('input', { type: 'text', placeholder: 'Direcci\xF3n, codigo postal, ciudad, pa\xEDs...' })
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'input-group column medium-10' },
+	                      _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Contacto'
+	                      ),
+	                      _react2.default.createElement('input', { type: 'tel', placeholder: '(+593) 9 8959 5742' })
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'input-group column medium-10' },
+	                      _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Correo electr\xF3nico'
+	                      ),
+	                      _react2.default.createElement('input', { type: 'email', placeholder: 'compania@dominio.com' })
+	                    )
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row divider' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'column medium-4' },
+	                _react2.default.createElement(
+	                  'h4',
+	                  { className: 'secondary' },
+	                  'Servicio'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'column medium-6' },
+	                _react2.default.createElement(
+	                  'h4',
+	                  { className: 'secondary' },
+	                  'Descripci\xF3n'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'column medium-2' },
+	                _react2.default.createElement(
+	                  'h4',
+	                  { className: 'secondary align-right' },
+	                  'Precio'
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(_ServiceItems2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row align-center' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'secondary' },
+	              'Usalo como quieras!'
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -48476,6 +48645,363 @@
 	}(_react.Component);
 	
 	exports.default = Create;
+
+/***/ },
+/* 277 */,
+/* 278 */
+/*!**************************************!*\
+  !*** ./app/components/QuotedCode.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var QuotedCode = function (_Component) {
+	  _inherits(QuotedCode, _Component);
+	
+	  function QuotedCode() {
+	    _classCallCheck(this, QuotedCode);
+	
+	    return _possibleConstructorReturn(this, (QuotedCode.__proto__ || Object.getPrototypeOf(QuotedCode)).apply(this, arguments));
+	  }
+	
+	  _createClass(QuotedCode, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "row align-justify" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "column medium-6" },
+	          _react2.default.createElement(
+	            "h4",
+	            null,
+	            "Aqu\xED Logo!"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "quoted-code column medium-4" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "row align-middle" },
+	            _react2.default.createElement(
+	              "h5",
+	              { className: "column align-right" },
+	              "Cotizaci\xF3n N\xBA:"
+	            ),
+	            _react2.default.createElement("input", { className: "column", type: "number" })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "row align-middle" },
+	            _react2.default.createElement(
+	              "h5",
+	              { className: "column align-right" },
+	              "Fecha:"
+	            ),
+	            _react2.default.createElement("input", { className: "column", type: "date" })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "row align-middle" },
+	            _react2.default.createElement(
+	              "h5",
+	              { className: "column align-right" },
+	              "Cliente:"
+	            ),
+	            _react2.default.createElement("input", { className: "column", type: "text" })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return QuotedCode;
+	}(_react.Component);
+	
+	exports.default = QuotedCode;
+
+/***/ },
+/* 279 */,
+/* 280 */,
+/* 281 */
+/*!****************************************!*\
+  !*** ./app/components/ServiceItems.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _desc, _value, _class;
+	
+	var _react = __webpack_require__(/*! react */ 6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 274);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _autobindDecorator = __webpack_require__(/*! autobind-decorator */ 282);
+	
+	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+	  var desc = {};
+	  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+	    desc[key] = descriptor[key];
+	  });
+	  desc.enumerable = !!desc.enumerable;
+	  desc.configurable = !!desc.configurable;
+	
+	  if ('value' in desc || desc.initializer) {
+	    desc.writable = true;
+	  }
+	
+	  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+	    return decorator(target, property, desc) || desc;
+	  }, desc);
+	
+	  if (context && desc.initializer !== void 0) {
+	    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+	    desc.initializer = undefined;
+	  }
+	
+	  if (desc.initializer === void 0) {
+	    Object['define' + 'Property'](target, property, desc);
+	    desc = null;
+	  }
+	
+	  return desc;
+	}
+	
+	var ServiceItems = (_class = function (_Component) {
+	  _inherits(ServiceItems, _Component);
+	
+	  function ServiceItems(props) {
+	    _classCallCheck(this, ServiceItems);
+	
+	    var _this = _possibleConstructorReturn(this, (ServiceItems.__proto__ || Object.getPrototypeOf(ServiceItems)).call(this, props));
+	
+	    _this.state = { nRows: 1 };
+	    return _this;
+	  }
+	
+	  _createClass(ServiceItems, [{
+	    key: 'addRow',
+	    value: function addRow(e) {
+	      e.preventDefault();
+	      var nRows = this.state.nRows;
+	
+	      this.setState({ nRows: nRows + 1 });
+	    }
+	  }, {
+	    key: 'removeRow',
+	    value: function removeRow(e) {
+	      e.preventDefault();
+	      var nRows = this.state.nRows;
+	
+	      if (nRows > 1) {
+	        this.setState({ nRows: nRows - 1 });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var nRows = this.state.nRows;
+	
+	      var currentRows = _lodash2.default.times(nRows);
+	      var serviceRow = currentRows.map(function (i) {
+	        var removeButton = _react2.default.createElement(
+	          'a',
+	          { onClick: _this2.removeRow, ref: 'remove-service', href: '#', className: 'button-remove' },
+	          _react2.default.createElement('i', { className: 'fa fa-minus' })
+	        );
+	        return _react2.default.createElement(
+	          'div',
+	          { key: i, ref: 'description', className: 'service-description row input-group' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-4' },
+	            _react2.default.createElement('input', { type: 'text', placeholder: 'Que servicio?' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-6 fix' },
+	            _react2.default.createElement('textarea', { type: 'textarea', placeholder: 'Descripci\xF3n el servicio\u2026' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'column medium-2 clear align-self-bottom' },
+	            _react2.default.createElement('input', { type: 'number', placeholder: '120,00', step: '0.01' })
+	          ),
+	          i > 0 ? removeButton : null
+	        );
+	      });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'service row' },
+	        _react2.default.createElement(
+	          'a',
+	          { onClick: this.addRow, ref: 'add-service', href: '#', className: 'button-add' },
+	          _react2.default.createElement('i', { className: 'fa fa-plus' })
+	        ),
+	        serviceRow
+	      );
+	    }
+	  }]);
+	
+	  return ServiceItems;
+	}(_react.Component), (_applyDecoratedDescriptor(_class.prototype, 'addRow', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'addRow'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'removeRow', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'removeRow'), _class.prototype)), _class);
+	exports.default = ServiceItems;
+
+/***/ },
+/* 282 */
+/*!*******************************************!*\
+  !*** ./~/autobind-decorator/lib/index.js ***!
+  \*******************************************/
+/***/ function(module, exports) {
+
+	/**
+	 * @copyright 2015, Andrey Popp <8mayday@gmail.com>
+	 *
+	 * The decorator may be used on classes or methods
+	 * ```
+	 * @autobind
+	 * class FullBound {}
+	 *
+	 * class PartBound {
+	 *   @autobind
+	 *   method () {}
+	 * }
+	 * ```
+	 */
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = autobind;
+	
+	function autobind() {
+	  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	    args[_key] = arguments[_key];
+	  }
+	
+	  if (args.length === 1) {
+	    return boundClass.apply(undefined, args);
+	  } else {
+	    return boundMethod.apply(undefined, args);
+	  }
+	}
+	
+	/**
+	 * Use boundMethod to bind all methods on the target.prototype
+	 */
+	function boundClass(target) {
+	  // (Using reflect to get all keys including symbols)
+	  var keys = undefined;
+	  // Use Reflect if exists
+	  if (typeof Reflect !== 'undefined' && typeof Reflect.ownKeys === 'function') {
+	    keys = Reflect.ownKeys(target.prototype);
+	  } else {
+	    keys = Object.getOwnPropertyNames(target.prototype);
+	    // use symbols if support is provided
+	    if (typeof Object.getOwnPropertySymbols === 'function') {
+	      keys = keys.concat(Object.getOwnPropertySymbols(target.prototype));
+	    }
+	  }
+	
+	  keys.forEach(function (key) {
+	    // Ignore special case target method
+	    if (key === 'constructor') {
+	      return;
+	    }
+	
+	    var descriptor = Object.getOwnPropertyDescriptor(target.prototype, key);
+	
+	    // Only methods need binding
+	    if (typeof descriptor.value === 'function') {
+	      Object.defineProperty(target.prototype, key, boundMethod(target, key, descriptor));
+	    }
+	  });
+	  return target;
+	}
+	
+	/**
+	 * Return a descriptor removing the value and returning a getter
+	 * The getter will return a .bind version of the function
+	 * and memoize the result against a symbol on the instance
+	 */
+	function boundMethod(target, key, descriptor) {
+	  var fn = descriptor.value;
+	
+	  if (typeof fn !== 'function') {
+	    throw new Error('@autobind decorator can only be applied to methods not: ' + typeof fn);
+	  }
+	
+	  // In IE11 calling Object.defineProperty has a side-effect of evaluating the
+	  // getter for the property which is being replaced. This causes infinite
+	  // recursion and an "Out of stack space" error.
+	  var definingProperty = false;
+	
+	  return {
+	    configurable: true,
+	    get: function get() {
+	      if (definingProperty || this === target.prototype || this.hasOwnProperty(key)) {
+	        return fn;
+	      }
+	
+	      var boundFn = fn.bind(this);
+	      definingProperty = true;
+	      Object.defineProperty(this, key, {
+	        value: boundFn,
+	        configurable: true,
+	        writable: true
+	      });
+	      definingProperty = false;
+	      return boundFn;
+	    }
+	  };
+	}
+	module.exports = exports['default'];
+
 
 /***/ }
 /******/ ]);

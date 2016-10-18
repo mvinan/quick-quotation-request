@@ -10,7 +10,7 @@ $colors: (
   secondary: (
     base: $color-secondary,
     light: lighten($color-secondary, $color-shade-amount),
-    dark:  darken($color-secondary, $color-shade-amount - 10%),
+    dark:  darken($color-secondary, $color-shade-amount - 5%),
     trans: transparentize($color-secondary, $color-trans-amount)
   ),
 
