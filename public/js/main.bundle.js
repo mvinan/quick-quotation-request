@@ -79,9 +79,12 @@
 	
 	var _Guidelines2 = _interopRequireDefault(_Guidelines);
 	
+	var _Create = __webpack_require__(/*! ./routes/Create */ 276);
+	
+	var _Create2 = _interopRequireDefault(_Create);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//STYLES
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: _store2.default },
@@ -92,10 +95,11 @@
 	      _reactRouter.Route,
 	      { path: '/', component: _App2.default },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/guidelines', component: _Guidelines2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/guidelines', component: _Guidelines2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/create', component: _Create2.default })
 	    )
 	  )
-	), document.getElementById('app'));
+	), document.getElementById('app')); //STYLES
 
 /***/ },
 /* 1 */
@@ -30595,7 +30599,7 @@
   \****************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30606,6 +30610,8 @@
 	var _react = __webpack_require__(/*! react */ 6);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 209);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30625,24 +30631,77 @@
 	  }
 	
 	  _createClass(Home, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "home" },
+	        'div',
+	        { className: 'home' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "grid-container" },
+	          'div',
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            "h1",
-	            null,
-	            "Welcome to ",
+	            'header',
+	            { className: 'navigationbar align-justify' },
 	            _react2.default.createElement(
-	              "strong",
-	              null,
-	              "Quick Quotes"
+	              'div',
+	              { className: 'brand' },
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                _react2.default.createElement(
+	                  'strong',
+	                  null,
+	                  'QQ'
+	                )
+	              )
 	            ),
-	            " "
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'menu right display-flex' },
+	              _react2.default.createElement(
+	                'h4',
+	                { className: 'secondary' },
+	                'Es gratis :)'
+	              ),
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/create', className: 'button primary' },
+	                'Crear nueva Cotizaci\xF3n'
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'hero grid-container totaly-center' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row align-middle' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'hero-header column medium-6' },
+	              _react2.default.createElement(
+	                'h1',
+	                null,
+	                'Bienvenidos a ',
+	                _react2.default.createElement(
+	                  'strong',
+	                  null,
+	                  'Quick Quotes'
+	                ),
+	                ' '
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'column lead medium-9' },
+	                'Genera cotizaciones r\xE1pidas, modernas y con gran atenci\xF3n en su dise\xF1o.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'hero-image column medium-6' },
+	              _react2.default.createElement('img', { src: 'images/idea-process.svg', alt: 'idea-process' })
+	            )
 	          )
 	        )
 	      );
@@ -31140,6 +31199,89 @@
 	              'div',
 	              { className: 'column medium-2 box-white-mini totaly-center' },
 	              'Text'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'h1',
+	            { className: 'row' },
+	            'Title 1'
+	          ),
+	          _react2.default.createElement(
+	            'h1',
+	            { className: 'row secondary' },
+	            'Title 1 secondary'
+	          ),
+	          _react2.default.createElement(
+	            'h2',
+	            { className: 'row' },
+	            'Title 2'
+	          ),
+	          _react2.default.createElement(
+	            'h2',
+	            { className: 'row secondary' },
+	            'Title 2 secondary'
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            { className: 'row' },
+	            'Title 3'
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            { className: 'row secondary' },
+	            'Title 3 secondary'
+	          ),
+	          _react2.default.createElement(
+	            'h4',
+	            { className: 'row' },
+	            'Title 4'
+	          ),
+	          _react2.default.createElement(
+	            'h4',
+	            { className: 'row secondary' },
+	            'Title 4 secondary'
+	          ),
+	          _react2.default.createElement(
+	            'h5',
+	            { className: 'row' },
+	            'Title 5'
+	          ),
+	          _react2.default.createElement(
+	            'h5',
+	            { className: 'row secondary' },
+	            'Title 5 secondary'
+	          ),
+	          _react2.default.createElement(
+	            'h6',
+	            { className: 'row' },
+	            'Title 6'
+	          ),
+	          _react2.default.createElement(
+	            'h6',
+	            { className: 'row secondary' },
+	            'Title 6 secondary'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row align-middle-center' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#', className: 'button primary' },
+	              'Create a new invoice'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#', className: 'button secondary' },
+	              'Contact'
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '#', className: 'button default' },
+	              'Contact'
 	            )
 	          )
 	        )
@@ -48278,6 +48420,62 @@
 	}(_react.Component);
 	
 	exports.default = DemostrationColumns;
+
+/***/ },
+/* 276 */
+/*!******************************!*\
+  !*** ./app/routes/Create.js ***!
+  \******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Create = function (_Component) {
+	  _inherits(Create, _Component);
+	
+	  function Create() {
+	    _classCallCheck(this, Create);
+	
+	    return _possibleConstructorReturn(this, (Create.__proto__ || Object.getPrototypeOf(Create)).apply(this, arguments));
+	  }
+	
+	  _createClass(Create, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'I\'m the Create component'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Create;
+	}(_react.Component);
+	
+	exports.default = Create;
 
 /***/ }
 /******/ ]);

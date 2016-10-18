@@ -1,5 +1,5 @@
 .button {
-  padding: 10px 30px;
+  padding: 6px 34px 7px;
   border-width: 2px;
   margin: 10px;
   box-sizing: border-box;
@@ -8,6 +8,8 @@
   transition: 0.3s ease-in-out;
   cursor: pointer;
   text-decoration: none;
+  font-size: $font-size-small;
+  font-weight: $font-weight-regular;
 
   //DEFAULT
   &.default{

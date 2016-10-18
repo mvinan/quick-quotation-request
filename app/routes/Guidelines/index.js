@@ -124,6 +124,32 @@ class Guidelines extends Component {
           </div>
         </div>
 
+        <div className="row">
+          <h1 className="row">Title 1</h1>
+          <h1 className="row secondary">Title 1 secondary</h1>
+
+          <h2 className="row">Title 2</h2>
+          <h2 className="row secondary">Title 2 secondary</h2>
+
+          <h3 className="row">Title 3</h3>
+          <h3 className="row secondary">Title 3 secondary</h3>
+
+          <h4 className="row">Title 4</h4>
+          <h4 className="row secondary">Title 4 secondary</h4>
+
+          <h5 className="row">Title 5</h5>
+          <h5 className="row secondary">Title 5 secondary</h5>
+
+          <h6 className="row">Title 6</h6>
+          <h6 className="row secondary">Title 6 secondary</h6>
+
+          <div className="row align-middle-center">
+            <a href="#" className="button primary">Create a new invoice</a>
+            <a href="#" className="button secondary">Contact</a>
+            <a href="#" className="button default">Contact</a>
+          </div>
+        </div>
+
       </div>
     );
   }
