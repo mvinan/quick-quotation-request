@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import {connect} from 'react-redux'
 
 import QuotedCode from '../components/QuotedCode'
 import ServiceItems from '../components/ServiceItems'
+import Calculator from '../components/Calculator'
 
 class Create extends Component {
   render() {
@@ -60,10 +62,10 @@ class Create extends Component {
             </div>
 
             <div className="row divider">{/*divider*/}
-              <div className="column medium-4">
+              <div className="column medium-3">
                 <h4 className="secondary">Servicio</h4>
               </div>
-              <div className="column medium-6">
+              <div className="column medium-7">
                 <h4 className="secondary">Descripción</h4>
               </div>
               <div className="column medium-2">
@@ -72,6 +74,7 @@ class Create extends Component {
             </div>{/*end divider*/}
 
             <ServiceItems />
+            <Calculator />
           </form>
           <div className="row align-center">
             <h4 className="secondary">Usalo como quieras!</h4>

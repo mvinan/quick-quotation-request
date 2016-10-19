@@ -29,6 +29,9 @@
   &-description{
     position: relative;
     margin-bottom: 0;
+    .item-price{
+      text-align: right;
+    }
   }
 }
 
@@ -71,5 +74,30 @@
   }
   &:hover{
     background-color: darken($background-color-button, 15%);
+  }
+}
+
+.calculator{
+  margin-top: 60px;
+  &-subtotal,
+  &-total,
+  &-iva{
+    .column{
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  &-iva{
+    margin-top: 20px;
+    .column{
+      margin-top: 15px;
+    }
+  }
+
+  &-addDiscount{
+    font-size: $font-size-small;
+    color: color(primary, base);
+    text-align: right;
   }
 }

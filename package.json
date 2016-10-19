@@ -36,6 +36,7 @@
   "devDependencies": {
     "autoprefixer": "^6.5.1",
     "babel-loader": "^6.2.5",
+    "babel-preset-stage-0": "^6.16.0",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "lodash": "^4.16.4",
