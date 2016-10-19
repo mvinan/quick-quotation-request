@@ -14,8 +14,8 @@ class Create extends Component {
           <h2 className="row align-center">Laboratorio de Cotizaciones</h2>
         </div>
 
-        <div className="grid-container">
-          <form className="form panel">
+        <div className="grid-container align-center">
+          <form className="form panel column medium-10">
             <div className="row">
               <QuotedCode />
 

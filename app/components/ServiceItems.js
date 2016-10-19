@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 
 /*Actions*/
 import { addItem, removeItem } from '../actions/itemActions'
+import { saveSubprice, subTotalPrice } from '../actions/calculateActions'
 
 @connect( store => ({
   numberRow: store.itemFields.currentRows
@@ -25,9 +26,21 @@ class ServiceItems extends Component {
   removeRow(e){
     e.preventDefault();
     const {numberRow, dispatch} = this.props
+
     if(numberRow > 1){
       dispatch( removeItem() )
     }
+  }
+
+  @autobind
+  updatePrice(){
+    const { dispatch } = this.props
+    let items
+
+    items = [...document.querySelectorAll('.item-price')]
+
+    dispatch( saveSubprice( items ) )
+    dispatch( subTotalPrice( items ) )
   }
 
   render() {
@@ -47,7 +60,7 @@ class ServiceItems extends Component {
             <textarea className="item-description" type="textarea" placeholder="Descripción el servicio…" />
           </div>
           <div className="column medium-2 clear align-self-bottom">
-            <input className="item-price" type="number" placeholder="120,00" step="0.01"/>
+            <input id={`itemPrice-${i}`} onChange={this.updatePrice} ref="price" className="item-price" type="number" placeholder="120,00" step="0.01"/>
           </div>
           { i > 0 ? removeButton : null }
         </div>
