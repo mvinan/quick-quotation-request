@@ -16,7 +16,6 @@ class Calculator extends Component {
 
   componentDidUpdate(){
     const {dispatch, subTotalPrice} = this.props
-    console.log(this.refs.iva);
     dispatch( totalPrice(subTotalPrice))
   }
 

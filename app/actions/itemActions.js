@@ -1,7 +1,9 @@
-export const addItem = () => ({
-  type: 'ADD_ITEM'
+export const addItem = (item) => ({
+  type: 'ADD_ITEM',
+  payload: item
 })
 
-export const removeItem = () => ({
-  type: 'REMOVE_ITEM'
+export const removeItem = (item) => ({
+  type: 'REMOVE_ITEM',
+  payload: item
 })

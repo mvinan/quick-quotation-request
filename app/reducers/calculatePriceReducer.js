@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 const initialSate = {
-  subPrices: {},
+  subPrices: [],
   totalPrice: 0,
   subTotalPrice: 0
 }
@@ -12,7 +12,7 @@ const calculatePrice = (state=initialSate, action) => {
     case 'SAVE_SUBPRICE':
       newState = {
         ...state,
-        subPrices: action.payload.map( item => Number(item.value) )
+        subPrices: state.subPrices.concat( action.payload )
       }
       return newState
     case 'SUB_TOTAL_PRICE':

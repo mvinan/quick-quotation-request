@@ -1,9 +1,9 @@
 import _ from 'lodash'
 
-export const saveSubprice = (inputsPrice) => {
+export const saveSubprice = (subPrice) => {
   return {
     type: 'SAVE_SUBPRICE',
-    payload: inputsPrice
+    payload: subPrice
   }
 }
 

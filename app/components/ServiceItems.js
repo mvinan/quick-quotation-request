@@ -2,13 +2,18 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import autobind from 'autobind-decorator'
 import {connect} from 'react-redux'
+import uuid from 'uuid'
 
 /*Actions*/
-import { addItem, removeItem } from '../actions/itemActions'
+import { addItem } from '../actions/itemActions'
 import { saveSubprice, subTotalPrice } from '../actions/calculateActions'
 
+/*Components*/
+import ServiceDescription from './ServiceDescription'
+
 @connect( store => ({
-  numberRow: store.itemFields.currentRows
+  numberRow: store.itemFields.currentRows,
+  services: store.itemFields.services
 }))
 class ServiceItems extends Component {
   constructor(props){
@@ -16,60 +21,51 @@ class ServiceItems extends Component {
   }
 
   @autobind
-  addRow(e){
+  _service(){
+    let id = uuid.v1()
+    return (<ServiceDescription key={id} id={id}/>)
+  }
+
+  componentDidMount(){
+    const {dispatch, numberRow} = this.props
+    dispatch( addItem(this._service()) )
+  }
+
+  @autobind
+  addNewService(e){
     e.preventDefault();
     const {dispatch} = this.props
-    dispatch( addItem() )
+    dispatch( addItem(this._service()) )
   }
 
+  // @autobind
+  // updatePrice(subPrice){
+  //   const { dispatch } = this.props
+  //   let items
+  //
+  //   // items = [...document.querySelectorAll('.item-price')]
+  //   //
+  //   // dispatch( saveSubprice( items ) )
+  //   // dispatch( subTotalPrice( items ) )
+  //
+  //   console.log(subPrice);
+  // }
+
   @autobind
-  removeRow(e){
-    e.preventDefault();
-    const {numberRow, dispatch} = this.props
-
-    if(numberRow > 1){
-      dispatch( removeItem() )
-    }
-  }
-
-  @autobind
-  updatePrice(){
-    const { dispatch } = this.props
-    let items
-
-    items = [...document.querySelectorAll('.item-price')]
-
-    dispatch( saveSubprice( items ) )
-    dispatch( subTotalPrice( items ) )
+  renderService(){
+    const { services  } = this.props
+    return services.map( (service, index) => {
+      return service
+    })
   }
 
   render() {
-    const {numberRow} = this.props
-    let currentRows = _.times(numberRow)
-    let removeButton = (<a onClick={this.removeRow} ref="remove-service" href="#" className="button-remove"><i className="fa fa-minus"></i></a>);
+    const removeButton = (i) => (<a onClick={this.removeRow} ref="removeService" href="#" className="button-remove"><i className="fa fa-minus"></i></a>);
 
-    let addButton = (<a onClick={this.addRow} ref="add-service" href="#" className="button-add"><i className="fa fa-plus"></i></a>);
-
-    let serviceRow = currentRows.map((i)=>{
-      return (
-        <div key={i} ref="description" className="service-description row input-group">
-          <div className="column medium-3">
-            <input className="item" type="text" placeholder="Que servicio?" />
-          </div>
-          <div className="column medium-7 fix">
-            <textarea className="item-description" type="textarea" placeholder="Descripción el servicio…" />
-          </div>
-          <div className="column medium-2 clear align-self-bottom">
-            <input id={`itemPrice-${i}`} onChange={this.updatePrice} ref="price" className="item-price" type="number" placeholder="120,00" step="0.01"/>
-          </div>
-          { i > 0 ? removeButton : null }
-        </div>
-      )
-    })
     return (
       <div className="service row">
-        {addButton}
-        {serviceRow}
+        <a onClick={this.addNewService} ref="addService" href="#" className="button-add"><i className="fa fa-plus"></i></a>
+        {this.renderService()}
       </div>
     );
   }
