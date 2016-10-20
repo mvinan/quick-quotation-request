@@ -95,9 +95,17 @@
     }
   }
 
+  &-button{
+    margin-top: 60px;
+  }
   &-addDiscount{
     font-size: $font-size-small;
     color: color(primary, base);
     text-align: right;
+  }
+
+  #input-discount{
+    text-align: right;
+    color: color(primary, base);
   }
 }

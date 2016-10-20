@@ -6200,7 +6200,10 @@
 	
 	var initialSate = {
 	  totalPrice: 0,
-	  subTotalPrice: 0
+	  subTotalPrice: 0,
+	  hasDiscount: false,
+	  discount: 0,
+	  subTotalPriceWithDiscount: 0
 	};
 	
 	var calculatePrice = function calculatePrice() {
@@ -6210,19 +6213,36 @@
 	  var newState = void 0;
 	  switch (action.type) {
 	    case 'CALC_SUB_TOTAL_PRICE':
-	      var sumSubPrices = action.payload;
-	      var sumRoundedSubPrices = Number(sumSubPrices + '').toFixed(parseInt(2));
+	      var sumSubPrices = void 0,
+	          sumRoundedSubPrices = void 0;
+	
+	      sumSubPrices = action.payload;
+	      sumRoundedSubPrices = Number(sumSubPrices + '').toFixed(parseInt(2));
 	      newState = _extends({}, state, {
 	        subTotalPrice: sumRoundedSubPrices
 	      });
 	      return newState;
 	    case 'CALC_TOTAL_PRICE':
-	      var subtotal = action.payload.price;
-	      var subTotalNumber = Number(subtotal);
-	      var totalPrice = subTotalNumber * action.payload.iva + subTotalNumber;
-	      var total = Number(totalPrice + '').toFixed(parseInt(2));
+	      var totalPrice = void 0,
+	          subTotalNumber = void 0,
+	          total = void 0;
+	
+	      subTotalNumber = Number(action.payload.price);
+	      totalPrice = subTotalNumber * action.payload.iva + subTotalNumber;
+	
+	      total = Number(totalPrice + '').toFixed(parseInt(2));
 	      newState = _extends({}, state, {
 	        totalPrice: total
+	      });
+	      return newState;
+	    case 'ADD_DISCOUNT':
+	      newState = _extends({}, state, {
+	        hasDiscount: true
+	      });
+	      return newState;
+	    case 'DISCOUNT_VALUE':
+	      newState = _extends({}, state, {
+	        discount: action.payload
 	      });
 	      return newState;
 	    default:
@@ -49421,7 +49441,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.calcTotalPrice = exports.calcSubTotalPrice = undefined;
+	exports.sendDiscount = exports.addDiscount = exports.calcTotalPrice = exports.calcSubTotalPrice = undefined;
 	
 	var _lodash = __webpack_require__(/*! lodash */ 64);
 	
@@ -49445,6 +49465,20 @@
 	      price: price,
 	      iva: iva
 	    }
+	  };
+	};
+	
+	var addDiscount = exports.addDiscount = function addDiscount(hasDiscount) {
+	  return {
+	    type: 'ADD_DISCOUNT',
+	    payload: hasDiscount
+	  };
+	};
+	
+	var sendDiscount = exports.sendDiscount = function sendDiscount(discount) {
+	  return {
+	    type: 'DISCOUNT_VALUE',
+	    payload: discount
 	  };
 	};
 
@@ -49610,11 +49644,13 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _dec, _class;
+	var _dec, _class, _desc, _value, _class2;
 	
 	var _react = __webpack_require__(/*! react */ 6);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 212);
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
 	
@@ -49632,12 +49668,43 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+	  var desc = {};
+	  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+	    desc[key] = descriptor[key];
+	  });
+	  desc.enumerable = !!desc.enumerable;
+	  desc.configurable = !!desc.configurable;
+	
+	  if ('value' in desc || desc.initializer) {
+	    desc.writable = true;
+	  }
+	
+	  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+	    return decorator(target, property, desc) || desc;
+	  }, desc);
+	
+	  if (context && desc.initializer !== void 0) {
+	    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+	    desc.initializer = undefined;
+	  }
+	
+	  if (desc.initializer === void 0) {
+	    Object['define' + 'Property'](target, property, desc);
+	    desc = null;
+	  }
+	
+	  return desc;
+	}
+	
 	var Calculator = (_dec = (0, _reactRedux.connect)(function (store) {
 	  return {
 	    subTotalPrice: store.calculatePrice.subTotalPrice,
-	    totalPrice: store.calculatePrice.totalPrice
+	    totalPrice: store.calculatePrice.totalPrice,
+	    hasDiscount: store.calculatePrice.hasDiscount,
+	    discount: store.calculatePrice.discount
 	  };
-	}), _dec(_class = function (_Component) {
+	}), _dec(_class = (_class2 = function (_Component) {
 	  _inherits(Calculator, _Component);
 	
 	  function Calculator(props) {
@@ -49646,27 +49713,83 @@
 	    return _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
 	  }
 	
-	  // componentDidUpdate(){
-	  //   const {dispatch, subTotalPrice} = this.props
-	  //   dispatch( calcTotalPrice(subTotalPrice) )
-	  // }
-	
 	  _createClass(Calculator, [{
-	    key: 'render',
-	    value: function render() {
+	    key: 'handlerDiscountButton',
+	    value: function handlerDiscountButton(e) {
+	      var dispatch = this.props.dispatch;
+	
+	      e.preventDefault();
+	      dispatch((0, _calculateActions.addDiscount)(true));
+	    }
+	  }, {
+	    key: '_calculateDiscount',
+	    value: function _calculateDiscount() {
 	      var _props = this.props;
 	      var subTotalPrice = _props.subTotalPrice;
-	      var totalPrice = _props.totalPrice;
+	      var discount = _props.discount;
+	      var dispatch = _props.dispatch;
 	
-	      var addDiscount = _react2.default.createElement(
-	        'div',
-	        { className: 'row align-right' },
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'calculator-addDiscount', href: '#' },
-	          'Agregar descuento'
-	        )
+	      var discountValue = void 0,
+	          discountLocal = void 0,
+	          calculateTotal = void 0,
+	          addDecimalsToTotal = void 0;
+	
+	      discountValue = Number(discount);
+	      discountLocal = discountValue / 100;
+	      calculateTotal = Number(subTotalPrice) - Number(subTotalPrice) * discountLocal;
+	      addDecimalsToTotal = Number(calculateTotal + '').toFixed(parseInt(2));
+	      return addDecimalsToTotal;
+	    }
+	  }, {
+	    key: '_calculateTotal',
+	    value: function _calculateTotal() {
+	      var _props2 = this.props;
+	      var subTotalPrice = _props2.subTotalPrice;
+	      var dispatch = _props2.dispatch;
+	
+	      var subTotalWithDiscount = this._calculateDiscount();
+	      var calculateTotalWithDiscount = subTotalWithDiscount * 1.14;
+	
+	      var withDecimals = Number(calculateTotalWithDiscount + '').toFixed(parseInt(2));
+	      return withDecimals;
+	    }
+	  }, {
+	    key: 'updatePriceWithDiscount',
+	    value: function updatePriceWithDiscount() {
+	      var _props3 = this.props;
+	      var dispatch = _props3.dispatch;
+	      var subTotalPrice = _props3.subTotalPrice;
+	
+	      var discount = this.refs.discount.value;
+	      if (discount) {
+	        dispatch((0, _calculateActions.sendDiscount)(discount));
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props4 = this.props;
+	      var subTotalPrice = _props4.subTotalPrice;
+	      var totalPrice = _props4.totalPrice;
+	      var hasDiscount = _props4.hasDiscount;
+	
+	      var addDiscountButton = _react2.default.createElement(
+	        'a',
+	        { onClick: this.handlerDiscountButton, className: 'calculator-addDiscount', href: '#' },
+	        'Agregar descuento'
 	      );
+	
+	      var inputDiscount = _react2.default.createElement(
+	        'div',
+	        { className: 'row align-justify' },
+	        _react2.default.createElement(
+	          'h5',
+	          { className: 'secondary column medium-8 align-right' },
+	          'Descuento %'
+	        ),
+	        _react2.default.createElement('input', { onBlur: this.updatePriceWithDiscount, id: 'input-discount', ref: 'discount', className: 'column medium-2', type: 'number' })
+	      );
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'calculator row align-right' },
@@ -49687,7 +49810,11 @@
 	              subTotalPrice
 	            )
 	          ),
-	          addDiscount,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row align-right' },
+	            !hasDiscount ? addDiscountButton : inputDiscount
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'calculator-iva row align-right' },
@@ -49713,8 +49840,17 @@
 	            _react2.default.createElement(
 	              'h3',
 	              { className: 'column medium-4 align-right' },
-	              totalPrice
+	              hasDiscount ? this._calculateTotal() : totalPrice
 	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'calculator-button row align-right' },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/create/generate', className: 'button primary' },
+	            ' Genear Cotizaci\xF3n'
 	          )
 	        )
 	      );
@@ -49722,7 +49858,7 @@
 	  }]);
 	
 	  return Calculator;
-	}(_react.Component)) || _class);
+	}(_react.Component), (_applyDecoratedDescriptor(_class2.prototype, 'handlerDiscountButton', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'handlerDiscountButton'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, '_calculateDiscount', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, '_calculateDiscount'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, '_calculateTotal', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, '_calculateTotal'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'updatePriceWithDiscount', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'updatePriceWithDiscount'), _class2.prototype)), _class2)) || _class);
 	exports.default = Calculator;
 
 /***/ }
