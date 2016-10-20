@@ -1,13 +1,13 @@
 input{
   $background-color-input: transparentize(color(secondary, base), 0.5);
 
-  padding: 10px 5px;
+  padding: 15px 5px;
   border: none;
   border-bottom-width: 2px;
   border-bottom-color: color(secondary, dark);
   border-bottom-style: solid;
   transition: 0.3s ease-in-out;
-  font-size: $font-size-medium;
+  font-size: $font-size-small;
   color: $black;
   &:focus, &:hover{
     outline: none;
@@ -19,6 +19,7 @@ input{
 
 input::placeholder{
   color: color(default, trans);
+  font-size: $font-size-small;
 }
 
 .input-group{

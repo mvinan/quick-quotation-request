@@ -1,7 +1,6 @@
 import _ from 'lodash'
 
 const initialSate = {
-  subPrices: [],
   totalPrice: 0,
   subTotalPrice: 0
 }
@@ -9,26 +8,22 @@ const initialSate = {
 const calculatePrice = (state=initialSate, action) => {
   let newState
   switch (action.type){
-    case 'SAVE_SUBPRICE':
-      newState = {
-        ...state,
-        subPrices: state.subPrices.concat( action.payload )
-      }
-      return newState
-    case 'SUB_TOTAL_PRICE':
-      let sumSubPrices = _.sum(action.payload.map( item => Number(item.value)))
-      let sumRoundedSubPrices = new Number(sumSubPrices+'').toFixed(parseInt(2))
+    case 'CALC_SUB_TOTAL_PRICE':
+      let sumSubPrices = action.payload
+      let sumRoundedSubPrices = Number(sumSubPrices+'').toFixed(parseInt(2))
       newState = {
         ...state,
         subTotalPrice: sumRoundedSubPrices
       }
       return newState
-    case 'TOTAL_PRICE':
-      let subtotal = new Number(action.payload.subtotal)
-      let totalPrice = subtotal * action.payload.iva + subtotal
+    case 'CALC_TOTAL_PRICE':
+      let subtotal = action.payload.price
+      let subTotalNumber = Number(subtotal)
+      let totalPrice = (subTotalNumber * action.payload.iva) + subTotalNumber
+      let total = Number(totalPrice+'').toFixed(parseInt(2))
       newState = {
         ...state,
-        totalPrice
+        totalPrice: total
       }
       return newState
     default:

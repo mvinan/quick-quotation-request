@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import autobind from 'autobind-decorator'
 
-import { totalPrice } from '../actions/calculateActions'
+import { calcTotalPrice } from '../actions/calculateActions'
 
 
 @connect( store => ({
@@ -14,10 +14,10 @@ class Calculator extends Component {
     super(props)
   }
 
-  componentDidUpdate(){
-    const {dispatch, subTotalPrice} = this.props
-    dispatch( totalPrice(subTotalPrice))
-  }
+  // componentDidUpdate(){
+  //   const {dispatch, subTotalPrice} = this.props
+  //   dispatch( calcTotalPrice(subTotalPrice) )
+  // }
 
   render() {
     const { subTotalPrice, totalPrice } = this.props

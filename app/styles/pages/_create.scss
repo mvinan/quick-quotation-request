@@ -24,7 +24,7 @@
 .service{
   position: relative;
   textarea{
-    height: 40px;
+    height: 50px;
   }
   &-description{
     position: relative;
@@ -43,8 +43,8 @@
   right: 0;
   transform: translate(35px, -50%);
   background-color: $background-color-button;
-  width: 25px;
-  height: 25px;
+  width: 23px;
+  height: 23px;
   color: white;
   border-radius: 100%;
   transition: 0.2s ease;
@@ -52,7 +52,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -42%);
+    transform: translate(-50%, -45%);
     font-size: $font-size-small;
   }
   &:hover{
@@ -70,7 +70,7 @@
   transform: translate(-35px, 0);
   background-color: $background-color-button;
   i{
-    transform: translate(-50%, -45%);
+    transform: translate(-48%, -45%);
   }
   &:hover{
     background-color: darken($background-color-button, 15%);

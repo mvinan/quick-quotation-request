@@ -6199,7 +6199,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var initialSate = {
-	  subPrices: [],
 	  totalPrice: 0,
 	  subTotalPrice: 0
 	};
@@ -6210,25 +6209,20 @@
 	
 	  var newState = void 0;
 	  switch (action.type) {
-	    case 'SAVE_SUBPRICE':
-	      newState = _extends({}, state, {
-	        subPrices: state.subPrices.concat(action.payload)
-	      });
-	      return newState;
-	    case 'SUB_TOTAL_PRICE':
-	      var sumSubPrices = _lodash2.default.sum(action.payload.map(function (item) {
-	        return Number(item.value);
-	      }));
-	      var sumRoundedSubPrices = new Number(sumSubPrices + '').toFixed(parseInt(2));
+	    case 'CALC_SUB_TOTAL_PRICE':
+	      var sumSubPrices = action.payload;
+	      var sumRoundedSubPrices = Number(sumSubPrices + '').toFixed(parseInt(2));
 	      newState = _extends({}, state, {
 	        subTotalPrice: sumRoundedSubPrices
 	      });
 	      return newState;
-	    case 'TOTAL_PRICE':
-	      var subtotal = new Number(action.payload.subtotal);
-	      var totalPrice = subtotal * action.payload.iva + subtotal;
+	    case 'CALC_TOTAL_PRICE':
+	      var subtotal = action.payload.price;
+	      var subTotalNumber = Number(subtotal);
+	      var totalPrice = subTotalNumber * action.payload.iva + subTotalNumber;
+	      var total = Number(totalPrice + '').toFixed(parseInt(2));
 	      newState = _extends({}, state, {
-	        totalPrice: totalPrice
+	        totalPrice: total
 	      });
 	      return newState;
 	    default:
@@ -48577,7 +48571,7 @@
 	
 	var _ServiceItems2 = _interopRequireDefault(_ServiceItems);
 	
-	var _Calculator = __webpack_require__(/*! ../components/Calculator */ 285);
+	var _Calculator = __webpack_require__(/*! ../components/Calculator */ 287);
 	
 	var _Calculator2 = _interopRequireDefault(_Calculator);
 	
@@ -48909,19 +48903,21 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
 	
-	var _uuid = __webpack_require__(/*! uuid */ 286);
+	var _uuid = __webpack_require__(/*! uuid */ 282);
 	
 	var _uuid2 = _interopRequireDefault(_uuid);
 	
-	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 282);
+	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 284);
 	
-	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 283);
+	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 285);
 	
-	var _ServiceDescription = __webpack_require__(/*! ./ServiceDescription */ 284);
+	var _ServiceDescription = __webpack_require__(/*! ./ServiceDescription */ 286);
 	
 	var _ServiceDescription2 = _interopRequireDefault(_ServiceDescription);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -48961,7 +48957,8 @@
 	var ServiceItems = (_dec = (0, _reactRedux.connect)(function (store) {
 	  return {
 	    numberRow: store.itemFields.currentRows,
-	    services: store.itemFields.services
+	    services: store.itemFields.services,
+	    subTotalPrice: store.calculatePrice.subTotalPrice
 	  };
 	}), _dec(_class = (_class2 = function (_Component) {
 	  _inherits(ServiceItems, _Component);
@@ -48976,14 +48973,12 @@
 	    key: '_service',
 	    value: function _service() {
 	      var id = _uuid2.default.v1();
-	      return _react2.default.createElement(_ServiceDescription2.default, { key: id, id: id });
+	      return _react2.default.createElement(_ServiceDescription2.default, { key: id, id: id, updatePrice: this.updatePrice });
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _props = this.props;
-	      var dispatch = _props.dispatch;
-	      var numberRow = _props.numberRow;
+	      var dispatch = this.props.dispatch;
 	
 	      dispatch((0, _itemActions.addItem)(this._service()));
 	    }
@@ -48995,20 +48990,24 @@
 	
 	      dispatch((0, _itemActions.addItem)(this._service()));
 	    }
+	  }, {
+	    key: '_itemsFields',
+	    value: function _itemsFields() {
+	      return [].concat(_toConsumableArray(document.querySelectorAll('.item-price')));
+	    }
+	  }, {
+	    key: 'updatePrice',
+	    value: function updatePrice(e) {
+	      var items = this._itemsFields();
+	      var prices = items.map(function (price) {
+	        return Number(price.value);
+	      });
+	      var sumPrices = _lodash2.default.sum(prices);
+	      var dispatch = this.props.dispatch;
 	
-	    // @autobind
-	    // updatePrice(subPrice){
-	    //   const { dispatch } = this.props
-	    //   let items
-	    //
-	    //   // items = [...document.querySelectorAll('.item-price')]
-	    //   //
-	    //   // dispatch( saveSubprice( items ) )
-	    //   // dispatch( subTotalPrice( items ) )
-	    //
-	    //   console.log(subPrice);
-	    // }
-	
+	      dispatch((0, _calculateActions.calcSubTotalPrice)(sumPrices));
+	      dispatch((0, _calculateActions.calcTotalPrice)(sumPrices));
+	    }
 	  }, {
 	    key: 'renderService',
 	    value: function renderService() {
@@ -49021,16 +49020,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
-	      var removeButton = function removeButton(i) {
-	        return _react2.default.createElement(
-	          'a',
-	          { onClick: _this2.removeRow, ref: 'removeService', href: '#', className: 'button-remove' },
-	          _react2.default.createElement('i', { className: 'fa fa-minus' })
-	        );
-	      };
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'service row' },
@@ -49045,7 +49034,7 @@
 	  }]);
 	
 	  return ServiceItems;
-	}(_react.Component), (_applyDecoratedDescriptor(_class2.prototype, '_service', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, '_service'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'addNewService', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'addNewService'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'renderService', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'renderService'), _class2.prototype)), _class2)) || _class);
+	}(_react.Component), (_applyDecoratedDescriptor(_class2.prototype, '_service', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, '_service'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'addNewService', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'addNewService'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, '_itemsFields', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, '_itemsFields'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'updatePrice', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'updatePrice'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'renderService', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'renderService'), _class2.prototype)), _class2)) || _class);
 	exports.default = ServiceItems;
 
 /***/ },
@@ -49162,346 +49151,6 @@
 
 /***/ },
 /* 282 */
-/*!************************************!*\
-  !*** ./app/actions/itemActions.js ***!
-  \************************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var addItem = exports.addItem = function addItem(item) {
-	  return {
-	    type: 'ADD_ITEM',
-	    payload: item
-	  };
-	};
-	
-	var removeItem = exports.removeItem = function removeItem(item) {
-	  return {
-	    type: 'REMOVE_ITEM',
-	    payload: item
-	  };
-	};
-
-/***/ },
-/* 283 */
-/*!*****************************************!*\
-  !*** ./app/actions/calculateActions.js ***!
-  \*****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.totalPrice = exports.subTotalPrice = exports.saveSubprice = undefined;
-	
-	var _lodash = __webpack_require__(/*! lodash */ 64);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var saveSubprice = exports.saveSubprice = function saveSubprice(subPrice) {
-	  return {
-	    type: 'SAVE_SUBPRICE',
-	    payload: subPrice
-	  };
-	};
-	
-	var subTotalPrice = exports.subTotalPrice = function subTotalPrice(inputsPrice) {
-	  return {
-	    type: 'SUB_TOTAL_PRICE',
-	    payload: inputsPrice
-	  };
-	};
-	
-	var totalPrice = exports.totalPrice = function totalPrice(subtotal) {
-	  var iva = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.14;
-	
-	  return {
-	    type: 'TOTAL_PRICE',
-	    payload: {
-	      subtotal: subtotal,
-	      iva: iva
-	    }
-	  };
-	};
-
-/***/ },
-/* 284 */
-/*!**********************************************!*\
-  !*** ./app/components/ServiceDescription.js ***!
-  \**********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _dec, _class, _desc, _value, _class2;
-	
-	/*Actions*/
-	
-	
-	var _react = __webpack_require__(/*! react */ 6);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _autobindDecorator = __webpack_require__(/*! autobind-decorator */ 281);
-	
-	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
-	
-	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 282);
-	
-	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 283);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
-	  var desc = {};
-	  Object['ke' + 'ys'](descriptor).forEach(function (key) {
-	    desc[key] = descriptor[key];
-	  });
-	  desc.enumerable = !!desc.enumerable;
-	  desc.configurable = !!desc.configurable;
-	
-	  if ('value' in desc || desc.initializer) {
-	    desc.writable = true;
-	  }
-	
-	  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-	    return decorator(target, property, desc) || desc;
-	  }, desc);
-	
-	  if (context && desc.initializer !== void 0) {
-	    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-	    desc.initializer = undefined;
-	  }
-	
-	  if (desc.initializer === void 0) {
-	    Object['define' + 'Property'](target, property, desc);
-	    desc = null;
-	  }
-	
-	  return desc;
-	}
-	
-	var ServiceDescription = (_dec = (0, _reactRedux.connect)(function (store) {
-	  return {
-	    services: store.itemFields.services
-	  };
-	}), _dec(_class = (_class2 = function (_Component) {
-	  _inherits(ServiceDescription, _Component);
-	
-	  function ServiceDescription(props) {
-	    _classCallCheck(this, ServiceDescription);
-	
-	    return _possibleConstructorReturn(this, (ServiceDescription.__proto__ || Object.getPrototypeOf(ServiceDescription)).call(this, props));
-	  }
-	
-	  _createClass(ServiceDescription, [{
-	    key: 'removeService',
-	    value: function removeService(e) {
-	      e.preventDefault();
-	      var dispatch = this.props.dispatch;
-	
-	      dispatch((0, _itemActions.removeItem)(this.props.id));
-	    }
-	  }, {
-	    key: 'captureSubPrice',
-	    value: function captureSubPrice(e) {
-	      var dispatch = this.props.dispatch;
-	
-	      var subPriceNumber = new Number(this.refs.price.value);
-	      dispatch((0, _calculateActions.saveSubprice)(subPriceNumber));
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { id: 'service-' + this.props.id, ref: 'description', className: 'service-description row input-group' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column medium-3' },
-	          _react2.default.createElement('input', { className: 'item', type: 'text', placeholder: 'Que servicio?' })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column medium-7 fix' },
-	          _react2.default.createElement('textarea', { className: 'item-description', type: 'textarea', placeholder: 'Descripci\xF3n el servicio\u2026' })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column medium-2 clear align-self-bottom' },
-	          _react2.default.createElement('input', { onChange: this.captureSubPrice, ref: 'price', className: 'item-price', type: 'number', placeholder: '120,00', step: '0.01' })
-	        ),
-	        _react2.default.createElement(
-	          'a',
-	          { onClick: this.removeService, ref: 'removeService', href: '#', className: 'button-remove' },
-	          _react2.default.createElement('i', { className: 'fa fa-minus' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return ServiceDescription;
-	}(_react.Component), (_applyDecoratedDescriptor(_class2.prototype, 'removeService', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'removeService'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'captureSubPrice', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'captureSubPrice'), _class2.prototype)), _class2)) || _class);
-	exports.default = ServiceDescription;
-
-/***/ },
-/* 285 */
-/*!**************************************!*\
-  !*** ./app/components/Calculator.js ***!
-  \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _dec, _class;
-	
-	var _react = __webpack_require__(/*! react */ 6);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
-	
-	var _autobindDecorator = __webpack_require__(/*! autobind-decorator */ 281);
-	
-	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
-	
-	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 283);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Calculator = (_dec = (0, _reactRedux.connect)(function (store) {
-	  return {
-	    subTotalPrice: store.calculatePrice.subTotalPrice,
-	    totalPrice: store.calculatePrice.totalPrice
-	  };
-	}), _dec(_class = function (_Component) {
-	  _inherits(Calculator, _Component);
-	
-	  function Calculator(props) {
-	    _classCallCheck(this, Calculator);
-	
-	    return _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
-	  }
-	
-	  _createClass(Calculator, [{
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      var _props = this.props;
-	      var dispatch = _props.dispatch;
-	      var subTotalPrice = _props.subTotalPrice;
-	
-	      dispatch((0, _calculateActions.totalPrice)(subTotalPrice));
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _props2 = this.props;
-	      var subTotalPrice = _props2.subTotalPrice;
-	      var totalPrice = _props2.totalPrice;
-	
-	      var addDiscount = _react2.default.createElement(
-	        'div',
-	        { className: 'row align-right' },
-	        _react2.default.createElement(
-	          'a',
-	          { className: 'calculator-addDiscount', href: '#' },
-	          'Agregar descuento'
-	        )
-	      );
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'calculator row align-right' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'column medium-6' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'calculator-subtotal row align-right' },
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'column medium-8 align-right align-bottom' },
-	              'Subtotal'
-	            ),
-	            _react2.default.createElement(
-	              'h3',
-	              { className: 'column medium-4 align-right' },
-	              subTotalPrice
-	            )
-	          ),
-	          addDiscount,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'calculator-iva row align-right' },
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'column medium-8 align-right align-bottom' },
-	              'Impuesto'
-	            ),
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'column medium-4 align-right', ref: 'iva' },
-	              '14%'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'calculator-total row align-right' },
-	            _react2.default.createElement(
-	              'h4',
-	              { className: 'column medium-8 align-right align-bottom' },
-	              'Total'
-	            ),
-	            _react2.default.createElement(
-	              'h3',
-	              { className: 'column medium-4 align-right' },
-	              totalPrice
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Calculator;
-	}(_react.Component)) || _class);
-	exports.default = Calculator;
-
-/***/ },
-/* 286 */
 /*!************************!*\
   !*** ./~/uuid/uuid.js ***!
   \************************/
@@ -49515,7 +49164,7 @@
 	// Unique ID creation requires a high quality random # generator.  We feature
 	// detect to determine the best RNG source, normalizing to a function that
 	// returns 128-bits of randomness, since that's what's usually required
-	var _rng = __webpack_require__(/*! ./rng */ 287);
+	var _rng = __webpack_require__(/*! ./rng */ 283);
 	
 	// Maps for number <-> hex string conversion
 	var _byteToHex = [];
@@ -49693,7 +49342,7 @@
 
 
 /***/ },
-/* 287 */
+/* 283 */
 /*!*******************************!*\
   !*** ./~/uuid/rng-browser.js ***!
   \*******************************/
@@ -49733,6 +49382,348 @@
 	
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 284 */
+/*!************************************!*\
+  !*** ./app/actions/itemActions.js ***!
+  \************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var addItem = exports.addItem = function addItem(item) {
+	  return {
+	    type: 'ADD_ITEM',
+	    payload: item
+	  };
+	};
+	
+	var removeItem = exports.removeItem = function removeItem(item) {
+	  return {
+	    type: 'REMOVE_ITEM',
+	    payload: item
+	  };
+	};
+
+/***/ },
+/* 285 */
+/*!*****************************************!*\
+  !*** ./app/actions/calculateActions.js ***!
+  \*****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.calcTotalPrice = exports.calcSubTotalPrice = undefined;
+	
+	var _lodash = __webpack_require__(/*! lodash */ 64);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var calcSubTotalPrice = exports.calcSubTotalPrice = function calcSubTotalPrice(prices) {
+	  return {
+	    type: 'CALC_SUB_TOTAL_PRICE',
+	    payload: prices
+	  };
+	};
+	
+	var calcTotalPrice = exports.calcTotalPrice = function calcTotalPrice(price) {
+	  var iva = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.14;
+	
+	  return {
+	    type: 'CALC_TOTAL_PRICE',
+	    payload: {
+	      price: price,
+	      iva: iva
+	    }
+	  };
+	};
+
+/***/ },
+/* 286 */
+/*!**********************************************!*\
+  !*** ./app/components/ServiceDescription.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _dec, _class, _desc, _value, _class2;
+	
+	/*Actions*/
+	
+	
+	var _react = __webpack_require__(/*! react */ 6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _autobindDecorator = __webpack_require__(/*! autobind-decorator */ 281);
+	
+	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
+	
+	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 284);
+	
+	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 285);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+	  var desc = {};
+	  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+	    desc[key] = descriptor[key];
+	  });
+	  desc.enumerable = !!desc.enumerable;
+	  desc.configurable = !!desc.configurable;
+	
+	  if ('value' in desc || desc.initializer) {
+	    desc.writable = true;
+	  }
+	
+	  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+	    return decorator(target, property, desc) || desc;
+	  }, desc);
+	
+	  if (context && desc.initializer !== void 0) {
+	    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+	    desc.initializer = undefined;
+	  }
+	
+	  if (desc.initializer === void 0) {
+	    Object['define' + 'Property'](target, property, desc);
+	    desc = null;
+	  }
+	
+	  return desc;
+	}
+	
+	var ServiceDescription = (_dec = (0, _reactRedux.connect)(function (store) {
+	  return {
+	    subPrice: store.calculatePrice.subTotalPrice
+	  };
+	}), _dec(_class = (_class2 = function (_Component) {
+	  _inherits(ServiceDescription, _Component);
+	
+	  function ServiceDescription(props) {
+	    _classCallCheck(this, ServiceDescription);
+	
+	    return _possibleConstructorReturn(this, (ServiceDescription.__proto__ || Object.getPrototypeOf(ServiceDescription)).call(this, props));
+	  }
+	
+	  _createClass(ServiceDescription, [{
+	    key: 'capturePrice',
+	    value: function capturePrice(e) {
+	      var targetId = e.target.id;
+	      var targetValue = e.target.value;
+	      var _props = this.props;
+	      var dispatch = _props.dispatch;
+	      var id = _props.id;
+	
+	      if (targetValue) {
+	        this.props.updatePrice();
+	      }
+	    }
+	  }, {
+	    key: 'removeService',
+	    value: function removeService(e) {
+	      e.preventDefault();
+	      var _props2 = this.props;
+	      var dispatch = _props2.dispatch;
+	      var id = _props2.id;
+	      var subPrice = _props2.subPrice;
+	
+	      var newCalc = subPrice - this.refs.price.value;
+	      dispatch((0, _calculateActions.calcSubTotalPrice)(newCalc));
+	      dispatch((0, _calculateActions.calcTotalPrice)(newCalc));
+	      dispatch((0, _itemActions.removeItem)(id));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var id = this.props.id;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'service-' + id, ref: 'description', className: 'service-description row input-group' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'column medium-3' },
+	          _react2.default.createElement('input', { className: 'item', type: 'text', placeholder: 'Que servicio?' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'column medium-7 fix' },
+	          _react2.default.createElement('textarea', { className: 'item-description', type: 'textarea', placeholder: 'Descripci\xF3n el servicio\u2026' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'column medium-2 clear align-self-bottom' },
+	          _react2.default.createElement('input', { id: id, onBlur: this.capturePrice, ref: 'price', className: 'item-price', type: 'number', placeholder: '120,00', step: '0.01' })
+	        ),
+	        _react2.default.createElement(
+	          'a',
+	          { onClick: this.removeService, ref: 'removeService', href: '#', className: 'button-remove' },
+	          _react2.default.createElement('i', { className: 'fa fa-minus' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ServiceDescription;
+	}(_react.Component), (_applyDecoratedDescriptor(_class2.prototype, 'capturePrice', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'capturePrice'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'removeService', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'removeService'), _class2.prototype)), _class2)) || _class);
+	exports.default = ServiceDescription;
+
+/***/ },
+/* 287 */
+/*!**************************************!*\
+  !*** ./app/components/Calculator.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _dec, _class;
+	
+	var _react = __webpack_require__(/*! react */ 6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
+	
+	var _autobindDecorator = __webpack_require__(/*! autobind-decorator */ 281);
+	
+	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
+	
+	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 285);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Calculator = (_dec = (0, _reactRedux.connect)(function (store) {
+	  return {
+	    subTotalPrice: store.calculatePrice.subTotalPrice,
+	    totalPrice: store.calculatePrice.totalPrice
+	  };
+	}), _dec(_class = function (_Component) {
+	  _inherits(Calculator, _Component);
+	
+	  function Calculator(props) {
+	    _classCallCheck(this, Calculator);
+	
+	    return _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
+	  }
+	
+	  // componentDidUpdate(){
+	  //   const {dispatch, subTotalPrice} = this.props
+	  //   dispatch( calcTotalPrice(subTotalPrice) )
+	  // }
+	
+	  _createClass(Calculator, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var subTotalPrice = _props.subTotalPrice;
+	      var totalPrice = _props.totalPrice;
+	
+	      var addDiscount = _react2.default.createElement(
+	        'div',
+	        { className: 'row align-right' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'calculator-addDiscount', href: '#' },
+	          'Agregar descuento'
+	        )
+	      );
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'calculator row align-right' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'column medium-6' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'calculator-subtotal row align-right' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'column medium-8 align-right align-bottom' },
+	              'Subtotal'
+	            ),
+	            _react2.default.createElement(
+	              'h3',
+	              { className: 'column medium-4 align-right' },
+	              subTotalPrice
+	            )
+	          ),
+	          addDiscount,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'calculator-iva row align-right' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'column medium-8 align-right align-bottom' },
+	              'Impuesto'
+	            ),
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'column medium-4 align-right', ref: 'iva' },
+	              '14%'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'calculator-total row align-right' },
+	            _react2.default.createElement(
+	              'h4',
+	              { className: 'column medium-8 align-right align-bottom' },
+	              'Total'
+	            ),
+	            _react2.default.createElement(
+	              'h3',
+	              { className: 'column medium-4 align-right' },
+	              totalPrice
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Calculator;
+	}(_react.Component)) || _class);
+	exports.default = Calculator;
 
 /***/ }
 /******/ ]);

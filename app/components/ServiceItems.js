@@ -6,14 +6,15 @@ import uuid from 'uuid'
 
 /*Actions*/
 import { addItem } from '../actions/itemActions'
-import { saveSubprice, subTotalPrice } from '../actions/calculateActions'
+import { calcTotalPrice, calcSubTotalPrice } from '../actions/calculateActions'
 
 /*Components*/
 import ServiceDescription from './ServiceDescription'
 
 @connect( store => ({
   numberRow: store.itemFields.currentRows,
-  services: store.itemFields.services
+  services: store.itemFields.services,
+  subTotalPrice: store.calculatePrice.subTotalPrice
 }))
 class ServiceItems extends Component {
   constructor(props){
@@ -23,11 +24,11 @@ class ServiceItems extends Component {
   @autobind
   _service(){
     let id = uuid.v1()
-    return (<ServiceDescription key={id} id={id}/>)
+    return (<ServiceDescription key={id} id={id} updatePrice={this.updatePrice}/>)
   }
 
   componentDidMount(){
-    const {dispatch, numberRow} = this.props
+    const {dispatch} = this.props
     dispatch( addItem(this._service()) )
   }
 
@@ -38,18 +39,20 @@ class ServiceItems extends Component {
     dispatch( addItem(this._service()) )
   }
 
-  // @autobind
-  // updatePrice(subPrice){
-  //   const { dispatch } = this.props
-  //   let items
-  //
-  //   // items = [...document.querySelectorAll('.item-price')]
-  //   //
-  //   // dispatch( saveSubprice( items ) )
-  //   // dispatch( subTotalPrice( items ) )
-  //
-  //   console.log(subPrice);
-  // }
+  @autobind
+  _itemsFields(){
+    return [...document.querySelectorAll('.item-price')]
+  }
+
+  @autobind
+  updatePrice(e){
+    let items = this._itemsFields()
+    let prices = items.map( price => Number(price.value) )
+    let sumPrices = _.sum(prices)
+    const { dispatch } = this.props
+    dispatch( calcSubTotalPrice( sumPrices ))
+    dispatch( calcTotalPrice( sumPrices ))
+  }
 
   @autobind
   renderService(){
@@ -60,8 +63,6 @@ class ServiceItems extends Component {
   }
 
   render() {
-    const removeButton = (i) => (<a onClick={this.removeRow} ref="removeService" href="#" className="button-remove"><i className="fa fa-minus"></i></a>);
-
     return (
       <div className="service row">
         <a onClick={this.addNewService} ref="addService" href="#" className="button-add"><i className="fa fa-plus"></i></a>

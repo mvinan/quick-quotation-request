@@ -1,24 +1,17 @@
 import _ from 'lodash'
 
-export const saveSubprice = (subPrice) => {
+export const calcSubTotalPrice = (prices) => {
   return {
-    type: 'SAVE_SUBPRICE',
-    payload: subPrice
+    type: 'CALC_SUB_TOTAL_PRICE',
+    payload: prices
   }
 }
 
-export const subTotalPrice = (inputsPrice) => {
+export const calcTotalPrice = (price, iva=0.14) => {
   return {
-    type: 'SUB_TOTAL_PRICE',
-    payload: inputsPrice
-  }
-}
-
-export const totalPrice = (subtotal, iva=0.14) => {
-  return {
-    type: 'TOTAL_PRICE',
+    type: 'CALC_TOTAL_PRICE',
     payload: {
-      subtotal,
+      price,
       iva
     }
   }
