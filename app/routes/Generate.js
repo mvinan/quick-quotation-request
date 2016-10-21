@@ -10,7 +10,7 @@ class Generate extends Component {
     console.log(this.props);
     return (
       <div className="generate">
-        <h1>Generate</h1>
+        <h1>Generate </h1>
       </div>
     );
   }

@@ -37,6 +37,7 @@
   "devDependencies": {
     "autoprefixer": "^6.5.1",
     "babel-loader": "^6.2.5",
+    "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -50,6 +51,8 @@
     "rucksack-css": "^0.8.6",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.0"
   }
 }

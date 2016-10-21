@@ -6,6 +6,9 @@ var webpack = require('webpack')
 var path = require('path')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var extractCSS = new ExtractTextPlugin('css/[name].css')
+var webpackOptimize = new webpack.optimize.OccurenceOrderPlugin()
+var hotModuleReplacement = new webpack.HotModuleReplacementPlugin()
+var noErrorsPlugin = new webpack.NoErrorsPlugin()
 
 // Plugins POSTCSS
 var lost = require('lost') //GridSystem with PostCSS
@@ -20,11 +23,16 @@ var BUILD_DIR = path.join(__dirname, 'public') //Outpout
 var APP_DIR = path.join(__dirname, 'app') //Input
 
 var config = {
-  entry: APP_DIR,
+  devtool :'inline-source-map',
+  entry: [
+    'webpack-hot-middleware/client',
+    APP_DIR
+  ],
   cache: true,
   output: {
     path: BUILD_DIR,
-    filename: 'js/[name].bundle.js'
+    filename: 'js/[name].bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [{
@@ -51,7 +59,7 @@ var config = {
   sassLoader: {
     indentedSyntax: true
   },
-  plugins: [extractCSS]
+  plugins: [webpackOptimize, extractCSS, hotModuleReplacement, noErrorsPlugin ]
 }
 
 module.exports = config;

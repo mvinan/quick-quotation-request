@@ -23295,21 +23295,21 @@
 	    case 'FROM_UPDATE_VALUES':
 	      newState = _extends({}, state, {
 	        values: _extends({}, state.values, {
-	          from: _extends({}, state.from, _defineProperty({}, action.name, action.value))
+	          from: _extends({}, state.values.from, _defineProperty({}, action.name, action.value))
 	        })
 	      });
 	      return newState;
 	    case 'TO_UPDATE_VALUES':
 	      newState = _extends({}, state, {
 	        values: _extends({}, state.values, {
-	          to: _extends({}, state.to, _defineProperty({}, action.name, action.value))
+	          to: _extends({}, state.values.to, _defineProperty({}, action.name, action.value))
 	        })
 	      });
 	      return newState;
 	    case 'QUOTED_CODES_UPDATE_VALUES':
 	      newState = _extends({}, state, {
 	        values: _extends({}, state.values, {
-	          quotedCode: _extends({}, state.quotedCode, _defineProperty({}, action.name, action.value))
+	          quotedCode: _extends({}, state.values.quotedCode, _defineProperty({}, action.name, action.value))
 	        })
 	      });
 	      return newState;
@@ -47858,7 +47858,7 @@
 	                _react2.default.createElement(
 	                  'strong',
 	                  null,
-	                  'QQ'
+	                  'QQR'
 	                )
 	              )
 	            ),
@@ -47894,14 +47894,14 @@
 	                _react2.default.createElement(
 	                  'strong',
 	                  null,
-	                  'Quick Quotes'
+	                  'Quick Quotation Request'
 	                ),
 	                ' '
 	              ),
 	              _react2.default.createElement(
 	                'p',
 	                { className: 'column lead medium-9' },
-	                'Genera cotizaciones r\xE1pidas, modernas y con gran atenci\xF3n en su dise\xF1o.'
+	                'Genera cotizaciones r\xE1pidas, modernas y elegantes en su dise\xF1o ;)'
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -48667,19 +48667,19 @@
 	
 	var _QuotedCode2 = _interopRequireDefault(_QuotedCode);
 	
-	var _ServiceItems = __webpack_require__(/*! ../components/ServiceItems */ 282);
+	var _ServiceItems = __webpack_require__(/*! ../components/ServiceItems */ 283);
 	
 	var _ServiceItems2 = _interopRequireDefault(_ServiceItems);
 	
-	var _Calculator = __webpack_require__(/*! ../components/Calculator */ 288);
+	var _Calculator = __webpack_require__(/*! ../components/Calculator */ 289);
 	
 	var _Calculator2 = _interopRequireDefault(_Calculator);
 	
-	var _ToForm = __webpack_require__(/*! ../components/ToForm */ 289);
+	var _ToForm = __webpack_require__(/*! ../components/ToForm */ 290);
 	
 	var _ToForm2 = _interopRequireDefault(_ToForm);
 	
-	var _FromForm = __webpack_require__(/*! ../components/FromForm */ 290);
+	var _FromForm = __webpack_require__(/*! ../components/FromForm */ 291);
 	
 	var _FromForm2 = _interopRequireDefault(_FromForm);
 	
@@ -48924,7 +48924,7 @@
 	
 	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
 	
-	var _generateActions = __webpack_require__(/*! ../actions/generateActions */ 291);
+	var _generateActions = __webpack_require__(/*! ../actions/generateActions */ 282);
 	
 	var action = _interopRequireWildcard(_generateActions);
 	
@@ -49048,6 +49048,45 @@
 /***/ },
 /* 282 */
 /*!****************************************!*\
+  !*** ./app/actions/generateActions.js ***!
+  \****************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var updateValuesFrom = exports.updateValuesFrom = function updateValuesFrom(name, value) {
+	  return {
+	    type: 'FROM_UPDATE_VALUES',
+	    name: name, value: value
+	  };
+	};
+	
+	var updateValuesTo = exports.updateValuesTo = function updateValuesTo(name, value) {
+	  return {
+	    type: 'TO_UPDATE_VALUES',
+	    name: name, value: value
+	  };
+	};
+	
+	var updateValuesQuotedCode = exports.updateValuesQuotedCode = function updateValuesQuotedCode(name, value) {
+	  return {
+	    type: 'QUOTED_CODE_UPDATE_VALUES',
+	    name: name, value: value
+	  };
+	};
+	
+	var generateQuoted = exports.generateQuoted = function generateQuoted() {
+	  return {
+	    type: 'QUOTED_CODE_UPDATE_VALUES'
+	  };
+	};
+
+/***/ },
+/* 283 */
+/*!****************************************!*\
   !*** ./app/components/ServiceItems.js ***!
   \****************************************/
 /***/ function(module, exports, __webpack_require__) {
@@ -49082,15 +49121,15 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
 	
-	var _uuid = __webpack_require__(/*! uuid */ 283);
+	var _uuid = __webpack_require__(/*! uuid */ 284);
 	
 	var _uuid2 = _interopRequireDefault(_uuid);
 	
-	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 285);
+	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 286);
 	
-	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 286);
+	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 287);
 	
-	var _ServiceDescription = __webpack_require__(/*! ./ServiceDescription */ 287);
+	var _ServiceDescription = __webpack_require__(/*! ./ServiceDescription */ 288);
 	
 	var _ServiceDescription2 = _interopRequireDefault(_ServiceDescription);
 	
@@ -49217,7 +49256,7 @@
 	exports.default = ServiceItems;
 
 /***/ },
-/* 283 */
+/* 284 */
 /*!************************!*\
   !*** ./~/uuid/uuid.js ***!
   \************************/
@@ -49231,7 +49270,7 @@
 	// Unique ID creation requires a high quality random # generator.  We feature
 	// detect to determine the best RNG source, normalizing to a function that
 	// returns 128-bits of randomness, since that's what's usually required
-	var _rng = __webpack_require__(/*! ./rng */ 284);
+	var _rng = __webpack_require__(/*! ./rng */ 285);
 	
 	// Maps for number <-> hex string conversion
 	var _byteToHex = [];
@@ -49409,7 +49448,7 @@
 
 
 /***/ },
-/* 284 */
+/* 285 */
 /*!*******************************!*\
   !*** ./~/uuid/rng-browser.js ***!
   \*******************************/
@@ -49451,7 +49490,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 285 */
+/* 286 */
 /*!************************************!*\
   !*** ./app/actions/itemActions.js ***!
   \************************************/
@@ -49477,7 +49516,7 @@
 	};
 
 /***/ },
-/* 286 */
+/* 287 */
 /*!*****************************************!*\
   !*** ./app/actions/calculateActions.js ***!
   \*****************************************/
@@ -49530,7 +49569,7 @@
 	};
 
 /***/ },
-/* 287 */
+/* 288 */
 /*!**********************************************!*\
   !*** ./app/components/ServiceDescription.js ***!
   \**********************************************/
@@ -49559,9 +49598,9 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 3);
 	
-	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 285);
+	var _itemActions = __webpack_require__(/*! ../actions/itemActions */ 286);
 	
-	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 286);
+	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 287);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -49677,7 +49716,7 @@
 	exports.default = ServiceDescription;
 
 /***/ },
-/* 288 */
+/* 289 */
 /*!**************************************!*\
   !*** ./app/components/Calculator.js ***!
   \**************************************/
@@ -49705,7 +49744,7 @@
 	
 	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
 	
-	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 286);
+	var _calculateActions = __webpack_require__(/*! ../actions/calculateActions */ 287);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -49909,7 +49948,7 @@
 	exports.default = Calculator;
 
 /***/ },
-/* 289 */
+/* 290 */
 /*!**********************************!*\
   !*** ./app/components/ToForm.js ***!
   \**********************************/
@@ -49935,7 +49974,7 @@
 	
 	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
 	
-	var _generateActions = __webpack_require__(/*! ../actions/generateActions */ 291);
+	var _generateActions = __webpack_require__(/*! ../actions/generateActions */ 282);
 	
 	var action = _interopRequireWildcard(_generateActions);
 	
@@ -50053,7 +50092,7 @@
 	exports.default = ToForm;
 
 /***/ },
-/* 290 */
+/* 291 */
 /*!************************************!*\
   !*** ./app/components/FromForm.js ***!
   \************************************/
@@ -50079,7 +50118,7 @@
 	
 	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
 	
-	var _generateActions = __webpack_require__(/*! ../actions/generateActions */ 291);
+	var _generateActions = __webpack_require__(/*! ../actions/generateActions */ 282);
 	
 	var action = _interopRequireWildcard(_generateActions);
 	
@@ -50205,45 +50244,6 @@
 	  return FromForm;
 	}(_react.Component), (_applyDecoratedDescriptor(_class2.prototype, 'handlerForm', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class2.prototype, 'handlerForm'), _class2.prototype)), _class2)) || _class);
 	exports.default = FromForm;
-
-/***/ },
-/* 291 */
-/*!****************************************!*\
-  !*** ./app/actions/generateActions.js ***!
-  \****************************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var updateValuesFrom = exports.updateValuesFrom = function updateValuesFrom(name, value) {
-	  return {
-	    type: 'FROM_UPDATE_VALUES',
-	    name: name, value: value
-	  };
-	};
-	
-	var updateValuesTo = exports.updateValuesTo = function updateValuesTo(name, value) {
-	  return {
-	    type: 'TO_UPDATE_VALUES',
-	    name: name, value: value
-	  };
-	};
-	
-	var updateValuesQuotedCode = exports.updateValuesQuotedCode = function updateValuesQuotedCode(name, value) {
-	  return {
-	    type: 'QUOTED_CODE_UPDATE_VALUES',
-	    name: name, value: value
-	  };
-	};
-	
-	var generateQuoted = exports.generateQuoted = function generateQuoted() {
-	  return {
-	    type: 'QUOTED_CODE_UPDATE_VALUES'
-	  };
-	};
 
 /***/ },
 /* 292 */

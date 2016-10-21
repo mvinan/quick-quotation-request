@@ -17,7 +17,7 @@ const generateForm = (state=initialState, action) => {
         values: {
           ...state.values,
           from: {
-            ...state.from,
+            ...state.values.from,
             [action.name]: action.value
           }
         }
@@ -29,7 +29,7 @@ const generateForm = (state=initialState, action) => {
         values: {
           ...state.values,
           to: {
-            ...state.to,
+            ...state.values.to,
             [action.name]: action.value
           }
         }
@@ -41,7 +41,7 @@ const generateForm = (state=initialState, action) => {
         values: {
           ...state.values,
           quotedCode: {
-            ...state.quotedCode,
+            ...state.values.quotedCode,
             [action.name]: action.value
           }
         }
