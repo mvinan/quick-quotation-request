@@ -8,7 +8,7 @@ class Home extends Component {
         <div className="row">
           <header className="navigationbar align-justify">{/* MENU */}
             <div className="brand">
-              <h1><strong>QQ</strong></h1>
+              <h1><strong>QQR</strong></h1>
             </div>
 
             <div className="menu right display-flex">
@@ -21,8 +21,8 @@ class Home extends Component {
 
           <div className="row align-middle">
             <div className="hero-header column medium-6">
-              <h1>Bienvenidos a <strong>Quick Quotes</strong> </h1>
-              <p className="column lead medium-9">Genera cotizaciones rápidas, modernas y con gran atención en su diseño.</p>
+              <h1>Bienvenidos a <strong>Quick Quotation Request</strong> </h1>
+              <p className="column lead medium-9">Genera cotizaciones rápidas, modernas y elegantes en su diseño ;)</p>
             </div>
             <div className="hero-image column medium-6">
               <img src="images/idea-process.svg" alt="idea-process"/>

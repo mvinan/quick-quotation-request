@@ -1,4 +1,4 @@
-# Quickly Quotes
+# (WIP)Quick Quotation Request
 Actualmente en versión beta aplicación que genera rápidamente cotizaciones personalizadas. Desarrollada con `React` + `Redux` + `React-router` + `PostCSS` + `Webpack`
 
 ## Desarrolladores
