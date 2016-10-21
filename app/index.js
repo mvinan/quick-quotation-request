@@ -10,6 +10,7 @@ import App from './routes/App'
 import Home from './routes/Home'
 import Guidelines from './routes/Guidelines/'
 import Create from './routes/Create'
+import Generate from './routes/Generate'
 
 ReactDOM.render((
   <Provider store={store}>
@@ -18,6 +19,7 @@ ReactDOM.render((
         <IndexRoute component={Home} />
         <Route path="/guidelines" component={Guidelines}/>
         <Route path="/create" component={Create}/>
+        <Route path="/create/generate" component={Generate}/>
       </Route>
     </Router>
   </Provider>

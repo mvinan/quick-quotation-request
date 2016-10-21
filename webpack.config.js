@@ -21,7 +21,7 @@ var APP_DIR = path.join(__dirname, 'app') //Input
 
 var config = {
   entry: APP_DIR,
-  cache: false,
+  cache: true,
   output: {
     path: BUILD_DIR,
     filename: 'js/[name].bundle.js'

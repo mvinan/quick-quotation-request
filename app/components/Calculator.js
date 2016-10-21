@@ -87,7 +87,7 @@ class Calculator extends Component {
           </div>
         </div>
         <div className="calculator-button row align-right">
-          <Link to="/create/generate" className="button primary"> Genear Cotización</Link>
+          <Link id="generator" onClick={this.generateQuote} to="/create/generate" className="button primary"> Generar Cotización</Link>
         </div>
       </div>
     );
