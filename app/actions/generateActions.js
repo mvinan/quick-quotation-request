@@ -17,3 +17,13 @@ export const updateValuesQuotedCode= (name, value) => ({
 export const generateQuoted= () => ({
   type: 'QUOTED_CODE_UPDATE_VALUES'
 })
+
+export const updateValueService = (serviceId, service, description, price) => ({
+  type: 'SERVICE_UPDATE_VALUES',
+  service: {
+      serviceId,
+      service,
+      description,
+      price
+    }
+})

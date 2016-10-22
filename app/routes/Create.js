@@ -44,7 +44,7 @@ class Create extends Component {
                 <h4 className="secondary align-right">Precio</h4>
               </div>
             </div>{/*end divider*/}
-
+            
             <ServiceItems />
             <Calculator />
           </div>

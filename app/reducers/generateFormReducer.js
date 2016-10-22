@@ -4,7 +4,8 @@ const initialState = {
   values:{
     from: {},
     to: {},
-    quotedCode: {}
+    quotedCode: {},
+    servicesList: {}
   }
 }
 
@@ -43,6 +44,23 @@ const generateForm = (state=initialState, action) => {
           quotedCode: {
             ...state.values.quotedCode,
             [action.name]: action.value
+          }
+        }
+      }
+      return newState
+    case 'SERVICE_UPDATE_VALUES':
+      newState = {
+        ...state,
+        values: {
+          ...state.values,
+          servicesList: {
+            ...state.values.servicesList,
+            [action.service.serviceId]: {
+              ...state.values.servicesList[action.service.serviceId],
+              service: action.service.service,
+              description: action.service.description,
+              price: action.service.price
+            }
           }
         }
       }

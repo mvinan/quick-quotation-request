@@ -64,10 +64,10 @@ class ServiceItems extends Component {
 
   render() {
     return (
-      <div className="service row">
+      <form className="service row">
         <a onClick={this.addNewService} ref="addService" href="#" className="button-add"><i className="fa fa-plus"></i></a>
         {this.renderService()}
-      </div>
+      </form>
     );
   }
 }

@@ -4,7 +4,8 @@ import {connect} from 'react-redux'
 
 /*Actions*/
 import { removeItem } from '../actions/itemActions'
-import { calcSubTotalPrice, calcTotalPrice } from '../actions/calculateActions'
+import * as action from '../actions/calculateActions'
+import * as actionG from '../actions/generateActions'
 
 @connect( store => ({
   subPrice: store.calculatePrice.subTotalPrice
@@ -29,23 +30,34 @@ class ServiceDescription extends Component {
     e.preventDefault();
     const { dispatch, id, subPrice } = this.props
     let newCalc = subPrice - this.refs.price.value
-    dispatch( calcSubTotalPrice(newCalc) )
-    dispatch( calcTotalPrice(newCalc) )
+    dispatch( action.calcSubTotalPrice(newCalc) )
+    dispatch( action.calcTotalPrice(newCalc) )
     dispatch(removeItem(id))
+  }
+
+  @autobind
+  handlerInput(e){
+    const { dispatch } = this.props
+    let service = this.refs.service.value
+    let price = this.refs.price.value
+    let description = this.refs.description.value
+    let serviceId = this.refs.serviceItem.id
+
+    dispatch( actionG.updateValueService(serviceId, service, description, price) )
   }
 
   render() {
     const {id} = this.props
     return (
-      <div id={`service-${id}`}  ref="description" className="service-description row input-group">
+      <div id={`service-${id}`}  ref="serviceItem" className="service-description row input-group" >
         <div className="column medium-3">
-          <input className="item" type="text" placeholder="Que servicio?" />
+          <input ref="service" onBlur={this.handlerInput} className="item" type="text" placeholder="Que servicio?" />
         </div>
         <div className="column medium-7 fix">
-          <textarea className="item-description" type="textarea" placeholder="Descripción el servicio…" />
+          <textarea ref="description" onBlur={this.handlerInput} className="item-description" type="textarea" placeholder="Descripción el servicio…" />
         </div>
         <div className="column medium-2 clear align-self-bottom">
-          <input id={id} onBlur={this.capturePrice} ref="price" className="item-price" type="number" placeholder="120,00" step="0.01"/>
+          <input ref="price" id={id} onBlur={this.capturePrice} className="item-price" type="number" placeholder="120,00" step="0.01"/>
         </div>
         <a onClick={this.removeService} ref="removeService" href="#" className="button-remove"><i className="fa fa-minus"></i></a>
       </div>
