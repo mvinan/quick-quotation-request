@@ -49,12 +49,12 @@ class ServiceDescription extends Component {
   render() {
     const {id} = this.props
     return (
-      <div id={`service-${id}`}  ref="serviceItem" className="service-description row input-group" >
+      <div id={`service-${id}`}  ref="serviceItem" className="service-description row input-group" onBlur={this.handlerInput}>
         <div className="column medium-3">
-          <input ref="service" onBlur={this.handlerInput} className="item" type="text" placeholder="Que servicio?" />
+          <input ref="service" className="item" type="text" placeholder="Que servicio?" />
         </div>
         <div className="column medium-7 fix">
-          <textarea ref="description" onBlur={this.handlerInput} className="item-description" type="textarea" placeholder="Descripción el servicio…" />
+          <textarea ref="description" className="item-description" type="textarea" placeholder="Descripción el servicio…" />
         </div>
         <div className="column medium-2 clear align-self-bottom">
           <input ref="price" id={id} onBlur={this.capturePrice} className="item-price" type="number" placeholder="120,00" step="0.01"/>

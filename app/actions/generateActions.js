@@ -9,13 +9,9 @@ export const updateValuesTo = (name, value) => ({
   name, value
 })
 
-export const updateValuesQuotedCode= (name, value) => ({
+export const updateValuesQuotedCode = (name, value) => ({
   type: 'QUOTED_CODE_UPDATE_VALUES',
   name, value
-})
-
-export const generateQuoted= () => ({
-  type: 'QUOTED_CODE_UPDATE_VALUES'
 })
 
 export const updateValueService = (serviceId, service, description, price) => ({
@@ -26,4 +22,9 @@ export const updateValueService = (serviceId, service, description, price) => ({
       description,
       price
     }
+})
+
+export const updateValueTotal = (subtotal, total, discount) => ({
+  type: 'PRICES_UPDATE_VALUES',
+  subtotal, total, discount
 })

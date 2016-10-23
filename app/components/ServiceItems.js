@@ -28,8 +28,10 @@ class ServiceItems extends Component {
   }
 
   componentDidMount(){
-    const {dispatch} = this.props
-    dispatch( addItem(this._service()) )
+    const {dispatch, numberRow} = this.props
+    if(numberRow == 0){
+      dispatch( addItem(this._service()) )
+    }
   }
 
   @autobind

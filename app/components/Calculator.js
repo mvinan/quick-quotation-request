@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import autobind from 'autobind-decorator'
 
 import { addDiscount, sendDiscount, calcTotalPrice } from '../actions/calculateActions'
+import * as action from '../actions/generateActions'
 
 
 @connect( store => ({
@@ -55,6 +56,17 @@ class Calculator extends Component {
     }
   }
 
+  componentDidUpdate(){
+    const {dispatch, hasDiscount} = this.props
+    let subtotal, total, discount
+
+    subtotal = this.refs.priceSubTotal.textContent
+    total = this.refs.priceTotal.textContent
+
+    hasDiscount ? discount = this.refs.discount.value : discount = 0
+    dispatch( action.updateValueTotal( subtotal, total, discount) )
+  }
+
   render() {
     const { subTotalPrice, totalPrice, hasDiscount } = this.props
     const addDiscountButton = (<a onClick={this.handlerDiscountButton} className="calculator-addDiscount" href="#">Agregar descuento</a>);
@@ -70,7 +82,7 @@ class Calculator extends Component {
         <div className="column medium-6">
           <div className="calculator-subtotal row align-right">
             <h4 className="column medium-8 align-right align-bottom">Subtotal</h4>
-            <h3 className="column medium-4 align-right">{subTotalPrice}</h3>
+            <h3 ref="priceSubTotal" className="column medium-4 align-right">{subTotalPrice}</h3>
           </div>
 
           <div className="row align-right">
@@ -83,7 +95,7 @@ class Calculator extends Component {
           </div>
           <div className="calculator-total row align-right">
             <h4 className="column medium-8 align-right align-bottom">Total</h4>
-            <h3 className="column medium-4 align-right">{hasDiscount ? this._calculateTotal() : totalPrice }</h3>
+            <h3 ref="priceTotal" className="column medium-4 align-right">{hasDiscount ? this._calculateTotal() : totalPrice }</h3>
           </div>
         </div>
         <div className="calculator-button row align-right">
