@@ -19,7 +19,7 @@ ReactDOM.render((
         <IndexRoute component={Home} />
         <Route path="/guidelines" component={Guidelines}/>
         <Route path="/create" component={Create}/>
-        <Route path="/create/generate" component={Generate}/>
+        <Route path="/generate" component={Generate}/>
       </Route>
     </Router>
   </Provider>

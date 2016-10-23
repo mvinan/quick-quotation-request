@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:400,600,800');
+
+#app{
+  background-color: #f2f5f7;
+}
+
+.generate{
+  font-family: 'Dosis';
+  .panel{
+    box-shadow: 0 0 34px -10px hsla(180,0%,59%,.5);
+    background-color: white;
+  }
+}
+
+h1, h4, h3, h2, h5, h6{
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-family: 'Dosis';
+}
+
+h3{
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 13px 0px;
+}
+
+h4{
+  font-weight: normal;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.generate-code{
+  &-info {
+    margin-bottom: 7px;
+    &.number{
+      .title, .value{
+        font-size: 20px;
+      }
+      margin-bottom: 20px;
+    }
+
+    .title{
+      font-weight: 600;
+    }
+    .value{
+      font-weight: 400;
+    }
+
+    .column{
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.generate-brand{
+  padding-left: 20px;
+  .brand{
+    width: auto;
+    height: 40px;
+    img{
+      width: auto;
+      height: 100%;
+    }
+  }
+}
+
+.generate-companiesInfo{
+  padding: 80px 0;
+  h3{
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  h4{
+    font-size: 14px;
+  }
+}
+
+.generateServicesList{
+  $padding-space: 10px;
+  border-bottom: 2px solid color(secondary, base);
+
+  &-header{
+    background-color: #F9FAFB;
+    padding: $padding-space 20px 0;
+    border-radius: 7px 7px 0 0;
+    div{
+      font-size: 20px;
+      color: color(primary, base);
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: $padding-space;
+    }
+  }
+
+  &-body{
+    padding: $padding-space;
+  }
+}
+
+.generateServiceItem{
+  padding: 10px;
+  &-name{
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Avenir Next';
+  }
+  &-description{
+    font-family: 'Avenir Next';
+    font-size: 12px;
+  }
+}
+
+.generateTotal{
+  padding: 40px;
+
+  h3{
+    margin-top: 0px;
+    font-weight: 400;
+  }
+  h4{
+    font-weight: 600;
+    color: $gray;
+  }
+  &-price{
+    .column{
+      margin-bottom: 5px;
+    }
+  }
+  &-total{
+    margin-top: 20px;
+    h3{
+      font-weight: 800;
+    }
+  }
+}

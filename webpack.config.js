@@ -26,9 +26,10 @@ var config = {
   devtool :'inline-source-map',
   entry: [
     'webpack-hot-middleware/client',
+    'webpack/hot/dev-server',
     APP_DIR
   ],
-  cache: true,
+  cache: false,
   output: {
     path: BUILD_DIR,
     filename: 'js/[name].bundle.js',

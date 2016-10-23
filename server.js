@@ -22,7 +22,7 @@ app.set('view engine', 'pug')
 
 /*Routes*/
 app.get('*', function(req, res){
-  res.render('index', {title: 'Quickly Quoted Price'})
+  res.render('index', {title: 'miguelvinan.com'})
 })
 
 /*Listen an run Server*/
