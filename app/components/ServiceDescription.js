@@ -41,6 +41,7 @@ class ServiceDescription extends Component {
     let service = this.refs.service.value
     let price = this.refs.price.value
     let description = this.refs.description.value
+    description = description.replace(/\r?\n/g, '<br />');
     let serviceId = this.refs.serviceItem.id
 
     dispatch( actionG.updateValueService(serviceId, service, description, price) )

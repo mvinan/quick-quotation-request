@@ -6095,7 +6095,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var middlewares = (0, _redux.applyMiddleware)((0, _reduxPromiseMiddleware2.default)(), _reduxThunk2.default, (0, _reduxLogger2.default)());
+	var middlewares = (0, _redux.applyMiddleware)((0, _reduxPromiseMiddleware2.default)(), _reduxThunk2.default);
 	var store = (0, _redux.createStore)(_reducers2.default, middlewares);
 	
 	exports.default = store;
@@ -49754,6 +49754,7 @@
 	      var service = this.refs.service.value;
 	      var price = this.refs.price.value;
 	      var description = this.refs.description.value;
+	      description = description.replace(/\r?\n/g, '<br />');
 	      var serviceId = this.refs.serviceItem.id;
 	
 	      dispatch(actionG.updateValueService(serviceId, service, description, price));
@@ -61046,7 +61047,7 @@
   \***********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -61054,9 +61055,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	var _desc, _value, _class;
+	
 	var _react = __webpack_require__(/*! react */ 6);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _autobindDecorator = __webpack_require__(/*! autobind-decorator */ 280);
+	
+	var _autobindDecorator2 = _interopRequireDefault(_autobindDecorator);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -61066,34 +61073,64 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var GenerateServiceItem = function (_Component) {
+	function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+	  var desc = {};
+	  Object['ke' + 'ys'](descriptor).forEach(function (key) {
+	    desc[key] = descriptor[key];
+	  });
+	  desc.enumerable = !!desc.enumerable;
+	  desc.configurable = !!desc.configurable;
+	
+	  if ('value' in desc || desc.initializer) {
+	    desc.writable = true;
+	  }
+	
+	  desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+	    return decorator(target, property, desc) || desc;
+	  }, desc);
+	
+	  if (context && desc.initializer !== void 0) {
+	    desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+	    desc.initializer = undefined;
+	  }
+	
+	  if (desc.initializer === void 0) {
+	    Object['define' + 'Property'](target, property, desc);
+	    desc = null;
+	  }
+	
+	  return desc;
+	}
+	
+	var GenerateServiceItem = (_class = function (_Component) {
 	  _inherits(GenerateServiceItem, _Component);
 	
-	  function GenerateServiceItem() {
+	  function GenerateServiceItem(props) {
 	    _classCallCheck(this, GenerateServiceItem);
 	
-	    return _possibleConstructorReturn(this, (GenerateServiceItem.__proto__ || Object.getPrototypeOf(GenerateServiceItem)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (GenerateServiceItem.__proto__ || Object.getPrototypeOf(GenerateServiceItem)).call(this, props));
 	  }
 	
 	  _createClass(GenerateServiceItem, [{
-	    key: "render",
+	    key: 'createMarkup',
+	    value: function createMarkup() {
+	      return { __html: this.props.description };
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "generateServiceItem row" },
+	        'div',
+	        { className: 'generateServiceItem row' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "generateServiceItem-name column small-2 medium-3 align-middle" },
+	          'div',
+	          { className: 'generateServiceItem-name column small-2 medium-3 align-middle' },
 	          this.props.name
 	        ),
+	        _react2.default.createElement('div', { className: 'generateServiceItem-description column small-4 medium-7', dangerouslySetInnerHTML: this.createMarkup() }),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "generateServiceItem-description column small-4 medium-7" },
-	          this.props.description
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "generateServiceItem-price column small-2 medium-2 align-center align-bottom" },
+	          'div',
+	          { className: 'generateServiceItem-price column small-2 medium-2 align-center align-middle' },
 	          this.props.price
 	        )
 	      );
@@ -61101,8 +61138,7 @@
 	  }]);
 	
 	  return GenerateServiceItem;
-	}(_react.Component);
-	
+	}(_react.Component), (_applyDecoratedDescriptor(_class.prototype, 'createMarkup', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'createMarkup'), _class.prototype)), _class);
 	exports.default = GenerateServiceItem;
 
 /***/ },
