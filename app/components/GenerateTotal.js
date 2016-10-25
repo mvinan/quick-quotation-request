@@ -13,9 +13,19 @@ class GenerateTotal extends Component {
 
   @autobind
   calculateTaxs(){
-    const {prices} = this.props
-    let tax
-    tax = prices.subtotal * 0.14
+    const {prices, hasDiscount} = this.props
+    let tax, calcDiscount, subtotal, discount
+
+    subtotal = Number(prices.subtotal)
+    discount = Number(prices.discount)
+
+    if(hasDiscount){
+      calcDiscount = subtotal * (discount / 100)
+      tax = (subtotal - calcDiscount) * 0.14
+    }else{
+      tax = subtotal * 0.14
+    }
+
     tax = Number(tax + '').toFixed(parseInt(2))
     return tax
   }

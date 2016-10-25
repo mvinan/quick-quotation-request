@@ -61222,19 +61222,34 @@
 	  _createClass(GenerateTotal, [{
 	    key: 'calculateTaxs',
 	    value: function calculateTaxs() {
-	      var prices = this.props.prices;
+	      var _props = this.props;
+	      var prices = _props.prices;
+	      var hasDiscount = _props.hasDiscount;
 	
-	      var tax = void 0;
-	      tax = prices.subtotal * 0.14;
+	      var tax = void 0,
+	          calcDiscount = void 0,
+	          subtotal = void 0,
+	          discount = void 0;
+	
+	      subtotal = Number(prices.subtotal);
+	      discount = Number(prices.discount);
+	
+	      if (hasDiscount) {
+	        calcDiscount = subtotal * (discount / 100);
+	        tax = (subtotal - calcDiscount) * 0.14;
+	      } else {
+	        tax = subtotal * 0.14;
+	      }
+	
 	      tax = Number(tax + '').toFixed(parseInt(2));
 	      return tax;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props;
-	      var prices = _props.prices;
-	      var hasDiscount = _props.hasDiscount;
+	      var _props2 = this.props;
+	      var prices = _props2.prices;
+	      var hasDiscount = _props2.hasDiscount;
 	
 	      var discountElement = void 0;
 	
